@@ -8,10 +8,10 @@ import {registerAuth} from "@/lib/authFunctions/registerAuth";
 import {useState} from "react";
 import {redirect} from "next/navigation";
 import FormButton from "@/components/FormButton";
+import toast from "react-hot-toast";
 
 export default function Register() {
 
-    const [error, setError] = useState("")
     const [formData, setFormData] = useState({
         email: "",
         password: "",
@@ -39,10 +39,10 @@ export default function Register() {
                 redirect("/login")
                 break;
             case 400:
-                setError("Email is already in use.")
+                toast.error("Email is already in use.")
                 break;
             case 500:
-                setError("Something went wrong. Try Again")
+                toast.error("Something went wrong. Try Again")
                 break;
         }
     }
@@ -81,7 +81,7 @@ export default function Register() {
 
                             <FormButton text={"Register"} disable={isFormValid}/>
                         </div>
-                        {error && <p className={"text-red-500"}>{error}</p>}
+
                         <div className="mt-4 text-center">
                             Already have account?
                             <Link

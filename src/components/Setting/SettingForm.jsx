@@ -1,16 +1,17 @@
 
 "use client"
 import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {useState} from "react";
-import {updateProfile} from "@/lib/actions";
+import { updateProfile} from "@/lib/actions";
 import FormButton from "@/components/FormButton";
 import toast, {Toaster} from "react-hot-toast";
+import {firebaseUploadImage} from "@/firebase/actions";
+import AvatarDisplay from "@/components/AvatarDisplay";
 
 function SettingForm({formData}) {
 
-    const {username, email, bio, createdAt, profilePic} = formData;
+    const [imageFile, setImageFile] = useState(null);
+    const {_id, username, email, bio, createdAt, profilePic } = formData;
     const [formValue, setFormValue] = useState({
         username,
         email,
@@ -19,20 +20,14 @@ function SettingForm({formData}) {
         profilePic
     })
 
-    const handleProfilePicChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
+    const handleProfilePicChange = async (event) => {
+        const imageFile = event.target.files[0];
 
-                const base64Data = reader.result.split(',')[1];
-                const binaryData = Buffer.from(base64Data, 'base64');
-
-                setFormValue((prev) => (
-                    { ...prev, profilePic: binaryData}
-                ));
-            };
-            reader.readAsDataURL(file);
+        if (imageFile?.size <= 10 * 1024 * 1024) {
+            setImageFile(imageFile);
+            //toast.success("Image has been saved.")
+        }else {
+            toast.error("Sorry, Image too big.")
         }
     };
 
@@ -47,7 +42,14 @@ function SettingForm({formData}) {
 
     const handleSubmitChanges = async () => {
 
-        const response = await updateProfile(formValue)
+        let imageURL = formValue.profilePic;
+
+        if (imageFile){
+            imageURL  = await firebaseUploadImage(_id, imageFile);
+        }
+
+        const response = await updateProfile({...formValue, profilePic: imageURL})
+
         switch (response.status) {
             case 200:
                 toast.success(response.message)
@@ -57,39 +59,22 @@ function SettingForm({formData}) {
                 break;
         }
 
-        // const {updatedUser} = await updateProfile(formValue);
-        // console.log(updatedUser)
-        // if (updatedUser){
-        //     setFormValue((prev) => ({
-        //         ...prev,
-        //         username: updatedUser.username,
-        //         email: updatedUser.email,
-        //         bio: updatedUser.bio,
-        //         profilePic: updatedUser.profilePic,
-        //         createdAt: updatedUser.createdAt
-        //     }));
-        // }
+
     }
 
         const isFormDirty = () => {
         return (
             formValue.username !== username ||
-            formValue.bio !== bio ||
-            formValue.profilePic !== profilePic
+            formValue.bio !== bio
+            || imageFile && formValue.username.length !== 0
         );
     };
 
     return (
         <>
             <form action={handleSubmitChanges}>
-                <Avatar className="mt-4 w-28 h-28 border">
-                    <AvatarImage
-                        alt="User"
-                        src={profilePic}
-                        className={"object-cover"}
-                    />
-                    <AvatarFallback>{username[0]}</AvatarFallback>
-                </Avatar>
+
+                <AvatarDisplay profilePic={profilePic} username={username} />
 
                 <div className="mt-2">
                     <label className="w-fit block text-gray-700 font-semibold text-sm mb-2" htmlFor="profilePic">
@@ -126,8 +111,6 @@ function SettingForm({formData}) {
                 <FormButton className={"mt-4"} text={"Save Changes"} disable={isFormDirty()}/>
 
             </form>
-
-            <Toaster position="bottom-right"/>
         </>
     )
 

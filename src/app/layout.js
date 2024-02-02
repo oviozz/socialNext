@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/providers/ThemeProvider"
 import AuthProvider from "@/providers/SessionProvider";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import {Toaster} from "react-hot-toast";
 
 
 
@@ -41,6 +42,7 @@ export default async function RootLayout({ children }) {
                 </div>
             </ThemeProvider>
         </AuthProvider>
+        <Toaster position="top-right"/>
       </body>
     </html>
   );

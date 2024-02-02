@@ -39,7 +39,7 @@ export default function Login(){
             if (res?.error) {
                 toast.error( "Invalid email or password" );
             } else {
-                toast.success('Event has been created')
+                toast.success('Successfully logged in')
 
                 router.replace("/setting")
                 router.refresh();
@@ -49,7 +49,6 @@ export default function Login(){
     }
 
     const isFormValid = formData.email.trim() !== "" && formData.password.trim() !== "";
-
 
     return (
         <main className="flex flex-1 flex-col gap-4">
@@ -81,7 +80,6 @@ export default function Login(){
                     </form>
                 </div>
             </div>
-            <Toaster position="bottom-right"/>
         </main>
     )
 

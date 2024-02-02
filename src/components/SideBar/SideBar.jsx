@@ -1,14 +1,5 @@
 
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
-import { DialogTrigger, DialogTitle, DialogHeader, DialogContent, Dialog, DialogFooter } from "@/components/ui/dialog"
-import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import NavBar from "@/components/NavBar/NavBar";
 import SideLinks from "@/components/SideBar/SideLinks";
 
 export default function SideBar() {

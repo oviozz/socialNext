@@ -1,56 +1,57 @@
 
-
-import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
+import AvatarDisplay from "@/components/AvatarDisplay";
+import {redirect} from "next/navigation";
+import ProfileCompleteAlert from "@/components/ProfileCompleteAlert";
 
 
 export default function ProfileSection({profileData}){
 
-    const {username, email, bio, createdAt, profilePic, following, followers} = profileData;
+    const {username, email, bio, createdAt, profilePic, following, followers, postCount} = profileData;
 
     return (
-        <div className="shadow-sm rounded-lg">
-            <div >
-                <Avatar className="w-28 h-28 border">
-                    <AvatarImage
-                        alt="User"
-                        src="https://prazwal.vercel.app/assets/profilePic-8c027c9a.jpg"
-                    />
-                    <AvatarFallback>U</AvatarFallback>
-                </Avatar>
 
-                <div className={"mt-2"}>
-                    <h2 className="font-semibold text-lg">@{username}</h2>
-                    <p className="mt-1 text-gray-500 dark:text-gray-400">
-                        Bio: {bio}
-                    </p>
-                </div>
+        <>
 
-                <div className="grid grid-cols-3 gap-4 my-4">
-                    <div>
-                        <h3 className="font-semibold">{following.length}</h3>
-                        <p className="text-gray-500 dark:text-gray-400">Following</p>
+            <div className="rounded-lg">
+                <div >
+                    <AvatarDisplay profilePic={profilePic} username={username} />
+
+                    <div className={"mt-2"}>
+                        <h2 className="font-semibold text-lg">@{username}</h2>
+                        <p className="mt-1 text-gray-500 dark:text-gray-400">
+                            Bio: {bio}
+                        </p>
                     </div>
-                    <div>
-                        <h3 className="font-semibold">{followers.length}</h3>
-                        <p className="text-gray-500 dark:text-gray-400">Followers</p>
+
+                    <div className="grid grid-cols-3 gap-4 my-4">
+                        <div>
+                            <h3 className="font-semibold">{following.length}</h3>
+                            <p className="text-gray-500 dark:text-gray-400">Following</p>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold">{followers.length}</h3>
+                            <p className="text-gray-500 dark:text-gray-400">Followers</p>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold">{postCount}</h3>
+                            <p className="text-gray-500 dark:text-gray-400">Posts</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3 className="font-semibold">50</h3>
-                        <p className="text-gray-500 dark:text-gray-400">Posts</p>
+                    <div className="flex items-center gap-4 mt-4 mb-4">
+                        <Link href={"/setting"}>
+                            <Button className="bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-200" variant="solid">
+                                <SettingsIcon className="h-4 w-4 mr-1" />
+                                Edit Profile
+                            </Button>
+                        </Link>
                     </div>
-                </div>
-                <div className="flex items-center gap-4 mt-4 mb-4">
-                    <Link href={"/setting"}>
-                        <Button className="bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-200" variant="solid">
-                            <SettingsIcon className="h-4 w-4 mr-1" />
-                            Edit Profile
-                        </Button>
-                    </Link>
                 </div>
             </div>
-        </div>
+
+            <ProfileCompleteAlert dataConfirm={profileData}/>
+        </>
     )
 
 }
