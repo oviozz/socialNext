@@ -6,43 +6,51 @@ import Comment from "@/components/PostCard/ui/Comment";
 import Edit from "@/components/PostCard/ui/Edit";
 import DropToolMenu from "@/components/PostCard/ui/DropToolMenu";
 import Image from "next/image";
+import AvatarDisplay from "@/components/AvatarDisplay";
+import {getTimeAgo} from "@/lib/utils";
 
-export default function PostCard(){
+export default function PostCard({postData, size}){
     //max-w-2xl
+    const maxWidth = size === 'large' ? 'max-w-2xl' : 'max-w-xl';
+    const {_id: postID, user, image: postImage, caption, likes, comments, createdAt} = postData;
 
     return (
-        <div className="border shadow-sm rounded-lg max-w-2xl">
+        <div className={`border shadow-sm rounded-lg ${maxWidth}`}>
             <div className="p-4">
 
                 <div className={"flex justify-between"}>
                     <div className="flex items-center gap-4 mb-4">
-                        <Avatar className="w-12 h-12 border">
-                            <AvatarImage alt="User" src="https://prazwal.vercel.app/assets/profilePic-8c027c9a.jpg" />
-                            <AvatarFallback>U</AvatarFallback>
-                        </Avatar>
+                        {/*<Avatar className="w-12 h-12 border">*/}
+                        {/*    <AvatarImage alt="User" src={user.profilePic} />*/}
+                        {/*    <AvatarFallback>U</AvatarFallback>*/}
+                        {/*</Avatar>*/}
+                        <AvatarDisplay className={"w-12 h-12"} username={user.username} profilePic={user.profilePic}/>
+
                         <div className={"flex flex-col"}>
-                            <h2 className="font-semibold text-md">prazwal sharma</h2>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">✦ 12 days ago</p>
+                            <h2 className="font-semibold text-md">{user.username}</h2>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">✦ {getTimeAgo(createdAt)}</p>
                         </div>
                     </div>
 
                     <div>
-                        <DropToolMenu />
+                        <DropToolMenu postCardID={postID} postUserID={user._id} />
                     </div>
 
                 </div>
 
-                <h2 className="font-semibold text-lg">Post Title</h2>
-                <p className="mt-2">This is a sample post content. It includes some text about the post. This is a sample post content. It includes some text about the post.</p>
+                {/*<h2 className="font-semibold text-lg">Post Title</h2>*/}
+                <p className="mt-2">{caption}.</p>
 
-                <div className={"flex gap-5"}>
-                    <Image
-                        alt="Post image"
-                        className="rounded-lg object-cover w-full aspect-[4/3]  group-hover:opacity-50 transition-opacity mt-4"
-                        height={200}
-                        src="https://generated.vusercontent.net/placeholder.svg"
-                        width={200}
-                    />
+                <div className={"flex gap-5 "}>
+                    <div className={'lg:w-[700px]'}>
+                        <Image
+                            alt="Post image"
+                            className="rounded-lg object-cover w-full aspect-[4/3]  group-hover:opacity-50 transition-opacity mt-4"
+                            src={postImage}
+                            height={500}
+                            width={500}
+                        />
+                    </div>
 
                 </div>
 

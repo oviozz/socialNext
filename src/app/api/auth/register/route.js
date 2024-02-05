@@ -7,8 +7,9 @@ import bcrypt from "bcryptjs";
 
 export const POST = async (request) => {
 
-    const {email, password} = await request.json();
     await connectDB();
+
+    const {email, password} = await request.json();
 
     const existing = await User.findOne({email: email});
 

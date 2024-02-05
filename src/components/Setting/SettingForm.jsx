@@ -2,11 +2,12 @@
 "use client"
 import {Input} from "@/components/ui/input";
 import {useState} from "react";
-import { updateProfile} from "@/lib/actions";
+import { updateProfile} from "@/lib/profileFunctions/actions";
 import FormButton from "@/components/FormButton";
-import toast, {Toaster} from "react-hot-toast";
+import toast from "react-hot-toast";
 import {firebaseUploadImage} from "@/firebase/actions";
 import AvatarDisplay from "@/components/AvatarDisplay";
+import { RxUpdate } from "react-icons/rx";
 
 function SettingForm({formData}) {
 
@@ -45,7 +46,7 @@ function SettingForm({formData}) {
         let imageURL = formValue.profilePic;
 
         if (imageFile){
-            imageURL  = await firebaseUploadImage(_id, imageFile);
+            imageURL  = await firebaseUploadImage('profile', _id, imageFile);
         }
 
         const response = await updateProfile({...formValue, profilePic: imageURL})
@@ -108,7 +109,7 @@ function SettingForm({formData}) {
                     <Input disabled defaultValue={formValue.createdAt.split('T')[0]} className="mt-1 block w-full" placeholder="Account Created" type="date" />
                 </div>
 
-                <FormButton className={"mt-4"} text={"Save Changes"} disable={isFormDirty()}/>
+                <FormButton icon={<RxUpdate />} className={"mt-4"} text={"Save Changes"} disable={isFormDirty()}/>
 
             </form>
         </>

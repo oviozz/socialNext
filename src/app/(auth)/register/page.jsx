@@ -5,7 +5,7 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {registerAuth} from "@/lib/authFunctions/registerAuth";
-import {useState} from "react";
+import React, {useState} from "react";
 import {redirect} from "next/navigation";
 import FormButton from "@/components/FormButton";
 import toast from "react-hot-toast";
@@ -79,7 +79,7 @@ export default function Register() {
                             /></div>
                         <div className="mt-4">
 
-                            <FormButton text={"Register"} disable={isFormValid}/>
+                            <FormButton text={"Register"} icon={<LogInIcon />} disable={isFormValid}/>
                         </div>
 
                         <div className="mt-4 text-center">
@@ -95,5 +95,28 @@ export default function Register() {
                 </div>
             </div>
         </main>
+    )
+}
+
+
+
+function LogInIcon(props) {
+    return (
+        <svg
+            {...props}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+            <polyline points="10 17 15 12 10 7" />
+            <line x1="15" x2="3" y1="12" y2="12" />
+        </svg>
     )
 }

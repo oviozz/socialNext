@@ -1,5 +1,5 @@
 
-    import mongoose, {Schema} from "mongoose";
+import mongoose, {Schema} from "mongoose";
 
 
 const userSchema = new Schema(
@@ -12,7 +12,7 @@ const userSchema = new Schema(
         email: {
             type: String,
             required: true,
-            unique: true
+            unique: true,
         },
         password: {
             type: String,

@@ -2,7 +2,7 @@
 import PostCard from "@/components/PostCard/PostCard";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
-import {getProfile} from "@/lib/actions";
+import {getProfile} from "@/lib/profileFunctions/actions";
 import ProfileSection from "@/components/Profile/ProfileSection";
 
 
@@ -11,16 +11,13 @@ async function Profile() {
     const {dbUser} = await getProfile();
 
     return (
-        <main className="flex flex-1 flex-col gap-4 md:gap-8 md:p-6">
-            <ProfileSection profileData={dbUser}/>
-            <div className="mt-2">
-                <h2 className="font-semibold text-lg md:text-xl mb-4">Posts</h2>
+        <main className="flex flex-1 flex-col gap-4 md:gap-5 md:p-6">
 
-                <div className={"flex flex-wrap gap-5"}>
-                    <PostCard />
-                    <PostCard />
-                    <PostCard />
-                    <PostCard />
+            <ProfileSection profileData={dbUser}/>
+            <div>
+                <h2 className="font-semibold text-lg md:text-xl mb-4">Posts</h2>
+                <div className={"flex flex-wrap gap-4"}>
+
                 </div>
             </div>
         </main>

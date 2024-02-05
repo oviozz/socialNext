@@ -1,9 +1,15 @@
+
+
 import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
 import firebase_app from "@/firebase/config";
 
-export async function firebaseUploadImage(userID, imageBlob) {
+
+export async function firebaseUploadImage(path, userID, imageBlob, unique = null) {
+
     const storage = getStorage(firebase_app);
-    const storageRef = ref(storage, `profile/${userID}`);
+
+    const storagePath = unique ? `${path}/${userID}/${unique}` : `${path}/${userID}`;
+    const storageRef = ref(storage, storagePath);
 
     try {
         const snapshot = await uploadBytes(storageRef, imageBlob);

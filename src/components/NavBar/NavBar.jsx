@@ -1,11 +1,15 @@
 
 import {Input} from "@/components/ui/input";
-import CreatePostButton from "@/components/CreatePostButton";
 import {ThemeToggle} from "@/components/ThemeToggle/ThemeToggle";
 import MenuToggle from "@/components/NavBar/MenuToggle";
+import CreatePost from "@/components/CreatePost/CreatePost";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 
-const NavBar = () => {
+const NavBar = async () => {
+
+    const session = await getServerSession(authOptions);
 
     return (
         <nav className="flex p-4 h-14 lg:h-[60px] items-center justify-between gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
@@ -22,7 +26,7 @@ const NavBar = () => {
 
             <div className={"flex items-center gap-2"}>
 
-                <CreatePostButton />
+                {session ? <CreatePost /> : null}
                 <div className={"lg:flex hidden"}>
                     <ThemeToggle />
                 </div>

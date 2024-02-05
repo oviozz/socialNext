@@ -4,10 +4,13 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@/componen
 import {Button} from "@/components/ui/button";
 import Share from "@/components/PostCard/ui/Share";
 import Delete from "@/components/PostCard/ui/Delete";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 
-export default function DropToolMenu(){
+export default async function DropToolMenu({postUserID, postCardID}){
 
+    const session = await getServerSession(authOptions);
 
     return (
         <DropdownMenu >
@@ -19,7 +22,7 @@ export default function DropToolMenu(){
 
             <DropdownMenuContent className={"flex flex-col"} align="end">
                 <Share/>
-                <Delete />
+                {postUserID === session?.user.id ? <Delete deletePostID={postCardID} /> : null}
             </DropdownMenuContent>
         </DropdownMenu>
     )

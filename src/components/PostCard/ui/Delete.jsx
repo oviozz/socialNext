@@ -1,8 +1,33 @@
-import {Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog";
+
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger
+} from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
+import {revalidatePath} from "next/cache";
+import FormButton from "@/components/FormButton";
+import { MdDeleteForever } from "react-icons/md";
 
+const deletePostHandler = async (deletePostID) => {
+    const res = await fetch(`http://localhost:3000/api/post/${deletePostID}`, {
+        method: 'DELETE'
+    })
 
-export default function Delete(){
+    revalidatePath("/")
+    return await res.json();
+}
+
+export default function Delete({deletePostID}){
+    const onDelete = async () => {
+        "use server"
+        const res = await deletePostHandler(deletePostID);
+        console.log(res)
+    }
 
     return (
         <Dialog>
@@ -20,8 +45,13 @@ export default function Delete(){
                     <p>Are you sure you want to delete this post?</p>
                 </div>
                 <DialogFooter>
-                    <Button variant="outline">Cancel</Button>
-                    <Button variant={"destructive"}>Delete</Button>
+                    <DialogClose>
+                        <Button variant="outline">Cancel</Button>
+                    </DialogClose>
+
+                    <form action={onDelete}>
+                        <FormButton icon={<MdDeleteForever size={20} /> } text={'Delete'} disable={true} className={"bg-red-800 text-white px-2 hover:bg-red-900"}/>
+                    </form>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

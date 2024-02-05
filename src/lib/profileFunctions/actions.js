@@ -4,12 +4,12 @@
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {revalidatePath, revalidateTag} from "next/cache";
-import {firebaseUploadImage} from "@/firebase/actions";
 
 
 export const getProfile = async () => {
 
     const {user} = await getServerSession(authOptions);
+
     try {
         const res = await fetch(`http://localhost:3000/api/profile/${user.id}`, {
             cache: 'force-cache',
@@ -25,7 +25,6 @@ export const getProfile = async () => {
 
 export const updateProfile = async (formData) => {
 
-    console.log(formData)
     const {user} = await getServerSession(authOptions);
 
     try {

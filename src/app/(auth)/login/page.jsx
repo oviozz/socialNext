@@ -65,7 +65,7 @@ export default function Login(){
                             <Input value={formData.password} onChange={handleInputChange} className="mt-1 block w-full" name={"password"} placeholder="Password" type="password" />
                         </div>
                         <div className="mt-4">
-                            <FormButton text={"Login"} disable={isFormValid} />
+                            <FormButton text={"Login"} disable={isFormValid} icon={<LogInIcon />}/>
                         </div>
 
                         <div className="mt-4 text-center">

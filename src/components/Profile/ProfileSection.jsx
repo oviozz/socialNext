@@ -17,8 +17,7 @@ export default function ProfileSection({profileData}){
             <div className="rounded-lg">
                 <div >
                     <AvatarDisplay profilePic={profilePic} username={username} />
-
-                    <div className={"mt-2"}>
+                    <div className={"mt-4"}>
                         <h2 className="font-semibold text-lg">@{username}</h2>
                         <p className="mt-1 text-gray-500 dark:text-gray-400">
                             Bio: {bio}

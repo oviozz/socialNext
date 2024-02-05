@@ -42,7 +42,7 @@ export default async function RootLayout({ children }) {
                 </div>
             </ThemeProvider>
         </AuthProvider>
-        <Toaster position="top-right"/>
+        <Toaster position="bottom-right"/>
       </body>
     </html>
   );
