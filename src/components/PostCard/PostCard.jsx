@@ -1,7 +1,6 @@
 
 
-import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar"
-import Like from "@/components/PostCard/ui/Like";
+import Like from "@/components/PostCard/ui/Like/Like";
 import Comment from "@/components/PostCard/ui/Comment";
 import Edit from "@/components/PostCard/ui/Edit";
 import DropToolMenu from "@/components/PostCard/ui/DropToolMenu";
@@ -15,7 +14,7 @@ export default function PostCard({postData, size}){
     const {_id: postID, user, image: postImage, caption, likes, comments, createdAt} = postData;
 
     return (
-        <div className={`border shadow-sm rounded-lg ${maxWidth}`}>
+        <div className={`border shadow-sm rounded-lg ${maxWidth} w-full`}>
             <div className="p-4">
 
                 <div className={"flex justify-between"}>
@@ -31,18 +30,19 @@ export default function PostCard({postData, size}){
                             <p className="text-sm text-gray-500 dark:text-gray-400">✦ {getTimeAgo(createdAt)}</p>
                         </div>
                     </div>
-
+                    <div className={"flex flex-col"}>
+                        <h1>likeCount: {likes.length}</h1>
+                    </div>
                     <div>
                         <DropToolMenu postCardID={postID} postUserID={user._id} />
                     </div>
 
                 </div>
 
-                {/*<h2 className="font-semibold text-lg">Post Title</h2>*/}
                 <p className="mt-2">{caption}.</p>
 
                 <div className={"flex gap-5 "}>
-                    <div className={'lg:w-[700px]'}>
+                    <div className={'lg:w-[700px] w-full'}>
                         <Image
                             alt="Post image"
                             className="rounded-lg object-cover w-full aspect-[4/3]  group-hover:opacity-50 transition-opacity mt-4"
@@ -54,8 +54,8 @@ export default function PostCard({postData, size}){
 
                 </div>
 
-                <div className="flex items-center mt-4 justify-between lg:justify-normal">
-                    <Like />
+                <div className="flex items-center mt-4 justify-between lg:justify-normal select-none">
+                    <Like postCardID={postID} likes={likes}/>
                     <Comment />
                     <Edit />
                 </div>

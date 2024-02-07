@@ -7,7 +7,7 @@ import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {revalidateTag} from "next/cache";
 
 
-export const GET = async (req, {params}) => {
+export const GET = async (_, {params}) => {
 
     await connectDB();
 

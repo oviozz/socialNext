@@ -21,7 +21,7 @@ export default async function DropToolMenu({postUserID, postCardID}){
             </DropdownMenuTrigger>
 
             <DropdownMenuContent className={"flex flex-col"} align="end">
-                <Share/>
+                <Share shareID={postCardID}/>
                 {postUserID === session?.user.id ? <Delete deletePostID={postCardID} /> : null}
             </DropdownMenuContent>
         </DropdownMenu>

@@ -4,7 +4,8 @@ import Post from "@/models/Post";
 import {NextResponse} from "next/server";
 
 
-export const GET = async () => {
+
+export const GET = async () => { // get all post
 
     try {
 
@@ -24,7 +25,7 @@ export const GET = async () => {
 
 
 
-export const POST = async (req) => {
+export const POST = async (req) => { // create post
 
     await connectDB();
 

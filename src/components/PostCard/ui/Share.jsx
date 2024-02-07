@@ -5,7 +5,7 @@ import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 
 
-export default function Share({onClick}){
+export default function Share({onClick, shareID}){
     return (
         <Dialog>
             <DialogTrigger onClick={onClick} asChild>
@@ -21,7 +21,7 @@ export default function Share({onClick}){
                 <div className="grid gap-4 py-4">
                     <p>Copy the link below to share this post:</p>
                     <div className={"flex items-center gap-4"}>
-                        <Input disabled defaultValue="https://www.website.com/post/123" />
+                        <Input disabled defaultValue={`https://www.website.com/post/${shareID}`} />
 
                         <Button >
                             <CopyIcon className="h-4 w-4 mr-2" />

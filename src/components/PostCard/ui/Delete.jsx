@@ -14,7 +14,7 @@ import FormButton from "@/components/FormButton";
 import { MdDeleteForever } from "react-icons/md";
 
 const deletePostHandler = async (deletePostID) => {
-    const res = await fetch(`http://localhost:3000/api/post/${deletePostID}`, {
+    const res = await fetch(`http://localhost:3000/api/post/${deletePostID}/delete`, {
         method: 'DELETE'
     })
 
@@ -26,13 +26,13 @@ export default function Delete({deletePostID}){
     const onDelete = async () => {
         "use server"
         const res = await deletePostHandler(deletePostID);
-        console.log(res)
+
     }
 
     return (
         <Dialog>
             <DialogTrigger asChild>
-                <Button size="sm" variant="ghost" className={"text-red-500 hover:text-red-700"}>
+                <Button size="sm" variant="ghost" className={"text-red-500 hover:text-red-500"}>
                     <TrashIcon className="h-4 w-4 mr-1" />
                     Delete
                 </Button>
@@ -44,9 +44,9 @@ export default function Delete({deletePostID}){
                 <div className="grid gap-4 py-4">
                     <p>Are you sure you want to delete this post?</p>
                 </div>
-                <DialogFooter>
+                <DialogFooter className={"lg:flex flex-col gap-2 w-full"}>
                     <DialogClose>
-                        <Button variant="outline">Cancel</Button>
+                        <Button variant="outline" className={"w-full"}>Cancel</Button>
                     </DialogClose>
 
                     <form action={onDelete}>

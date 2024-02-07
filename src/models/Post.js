@@ -1,3 +1,4 @@
+
 import mongoose, {Schema} from "mongoose";
 
 const postScheme = new Schema(
@@ -16,11 +17,9 @@ const postScheme = new Schema(
             required: true
         },
         likes: [{
-            userId: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "User",
-                required: true
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            default: []
         }],
         comments: [{
             userId: {

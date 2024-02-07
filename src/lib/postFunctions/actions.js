@@ -4,7 +4,7 @@
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import connectDB from "@/lib/dbConnect";
-import {revalidatePath} from "next/cache";
+import {revalidatePath, revalidateTag} from "next/cache";
 
 export const createPostData = async (postData) => {
 
@@ -16,7 +16,7 @@ export const createPostData = async (postData) => {
             method: 'POST',
             body: JSON.stringify({
                 ...postData,
-                user: user.id
+                user: user.id,
             })
         });
 
@@ -30,3 +30,23 @@ export const createPostData = async (postData) => {
 }
 
 
+export const likePostHandler = async (postCardID) => {
+
+    const {user} = await getServerSession(authOptions);
+
+    try {
+
+        const res = await fetch(`http://localhost:3000/api/post/${postCardID}/like`, {
+            method: 'POST',
+            body: JSON.stringify({
+                userId: user.id
+            })
+        });
+
+        revalidateTag(`post-${postCardID}`)
+        return await res.json()
+
+    } catch (error) {
+        console.log(error)
+    }
+}

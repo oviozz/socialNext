@@ -18,14 +18,14 @@ const getPosts = async () => {
 
 export default async function Home() {
 
-    const {posts} = await getPosts();
-
+    const postData = await getPosts();
+    const data = postData?.posts
 
     return (
         <>
             <div className="flex flex-col items-center gap-5">
                 {
-                    posts.map((post) => (
+                    data?.map((post) => (
                         <PostCard key={post._id} size={"large"} postData={post}/>
                     ))
                 }
