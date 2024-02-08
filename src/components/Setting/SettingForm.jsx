@@ -43,6 +43,11 @@ function SettingForm({formData}) {
 
     const handleSubmitChanges = async () => {
 
+        if (formValue.username.length === 0 || formValue.bio.length === 0) {
+            toast.error("Please fill out the username and bio");
+            return;
+        }
+        
         let imageURL = formValue.profilePic;
 
         if (imageFile){
@@ -67,7 +72,7 @@ function SettingForm({formData}) {
         return (
             formValue.username !== username ||
             formValue.bio !== bio
-            || imageFile && formValue.username.length !== 0
+            || imageFile
         );
     };
 

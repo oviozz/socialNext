@@ -8,9 +8,9 @@ import {FaHeart} from "react-icons/fa";
 import {likePostHandler} from "@/lib/postFunctions/actions";
 import {useSession} from "next-auth/react";
 
-export default function LikeText({likeList, postCardID}){
+export default function LikeText({likeList, postCardID, userId}){
 
-    const { data: { user: { id: userId } } } = useSession();
+    // const { data: { user: { id: userId } } } = useSession();
 
     const hasLikedPost = likeList.includes(userId);
     const [isLiked, setIsLiked] = useState(hasLikedPost);
@@ -20,7 +20,7 @@ export default function LikeText({likeList, postCardID}){
     useEffect(() => {
         setIsLiked(hasLikedPost);
         setLikes(likeList.length);
-    }, [likeList]);
+    }, [postCardID, hasLikedPost, likeList.length]);
 
     const likePost = async () => {
         const response = await likePostHandler(postCardID);

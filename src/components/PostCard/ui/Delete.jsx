@@ -13,19 +13,18 @@ import {revalidatePath} from "next/cache";
 import FormButton from "@/components/FormButton";
 import { MdDeleteForever } from "react-icons/md";
 
-const deletePostHandler = async (deletePostID) => {
-    const res = await fetch(`http://localhost:3000/api/post/${deletePostID}/delete`, {
+const deletePostHandler = async (deletePostID, postUserID) => {
+    const res = await fetch(`http://localhost:3000/api/post/${deletePostID}/delete/${postUserID}`, {
         method: 'DELETE'
     })
 
-    revalidatePath("/")
     return await res.json();
 }
 
-export default function Delete({deletePostID}){
+export default function Delete({deletePostID, postUserID}){
     const onDelete = async () => {
         "use server"
-        const res = await deletePostHandler(deletePostID);
+        const res = await deletePostHandler(deletePostID, postUserID);
 
     }
 

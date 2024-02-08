@@ -21,7 +21,7 @@ export default async function LikeList({postID}){
     return (
         <>
             {
-                likeList.map((likeUser) => (
+                likeList?.map((likeUser) => (
                     <div key={likeUser._id} className="flex items-center gap-2">
                         <AvatarDisplay className={'w-10 h-10'}
                                        profilePic={likeUser.profilePic}

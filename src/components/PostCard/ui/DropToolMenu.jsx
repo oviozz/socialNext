@@ -22,7 +22,7 @@ export default async function DropToolMenu({postUserID, postCardID}){
 
             <DropdownMenuContent className={"flex flex-col"} align="end">
                 <Share shareID={postCardID}/>
-                {postUserID === session?.user.id ? <Delete deletePostID={postCardID} /> : null}
+                {postUserID === session?.user.id ? <Delete deletePostID={postCardID} postUserID={postUserID}/> : null}
             </DropdownMenuContent>
         </DropdownMenu>
     )

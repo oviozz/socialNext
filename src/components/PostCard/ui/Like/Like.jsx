@@ -4,16 +4,20 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import LikeText from "@/components/PostCard/ui/Like/LikeText";
 import LikeList from "@/components/PostCard/ui/Like/LikeList";
 import {Suspense} from "react";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 
-export default function Like({postCardID, likes}){
+export default async function Like({postCardID, likes}){
+
+    const {user} = await getServerSession(authOptions);
 
     return (
         <div className={"flex items-center"}>
 
             <Dialog>
 
-                <LikeText likeList={likes} postCardID={postCardID} />
+                <LikeText likeList={likes} postCardID={postCardID} userId={user?.id}/>
 
                 <DialogContent>
                     <DialogHeader>

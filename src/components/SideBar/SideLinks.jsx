@@ -13,7 +13,6 @@ export default function SideLinks(){
 
     const pathname = usePathname();
     const { data: session } = useSession()
-    //const userID = session.user.id;
 
     const linksData = [
         { name: 'Home', href: '/', icon: HomeIcon },

@@ -7,6 +7,7 @@ import DropToolMenu from "@/components/PostCard/ui/DropToolMenu";
 import Image from "next/image";
 import AvatarDisplay from "@/components/AvatarDisplay";
 import {getTimeAgo} from "@/lib/utils";
+import Link from "next/link";
 
 export default function PostCard({postData, size}){
     //max-w-2xl
@@ -19,27 +20,27 @@ export default function PostCard({postData, size}){
 
                 <div className={"flex justify-between"}>
                     <div className="flex items-center gap-4 mb-4">
-                        {/*<Avatar className="w-12 h-12 border">*/}
-                        {/*    <AvatarImage alt="User" src={user.profilePic} />*/}
-                        {/*    <AvatarFallback>U</AvatarFallback>*/}
-                        {/*</Avatar>*/}
-                        <AvatarDisplay className={"w-12 h-12"} username={user.username} profilePic={user.profilePic}/>
+
+                        <AvatarDisplay className={"w-12 h-12"}
+                                       username={user.username}
+                                       profilePic={user.profilePic}
+                        />
 
                         <div className={"flex flex-col"}>
-                            <h2 className="font-semibold text-md">{user.username}</h2>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">✦ {getTimeAgo(createdAt)}</p>
+                            <Link href={`profile/${user._id}`}>
+                                <h2 className="font-semibold text-md hover:underline hover:cursor-pointer">{user.username}</h2>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">✦ {getTimeAgo(createdAt)}</p>
+                            </Link>
                         </div>
                     </div>
-                    <div className={"flex flex-col"}>
-                        <h1>likeCount: {likes.length}</h1>
-                    </div>
+
                     <div>
                         <DropToolMenu postCardID={postID} postUserID={user._id} />
                     </div>
 
                 </div>
 
-                <p className="mt-2">{caption}.</p>
+                <p className="mt-2">{caption}</p>
 
                 <div className={"flex gap-5 "}>
                     <div className={'lg:w-[700px] w-full'}>

@@ -20,8 +20,7 @@ export const createPostData = async (postData) => {
             })
         });
 
-        revalidatePath("/")
-
+        revalidateTag('homePost')
         return await res.json()
     } catch (error){
         console.error('Error creating post:', error.message);

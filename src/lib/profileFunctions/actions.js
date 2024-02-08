@@ -6,13 +6,13 @@ import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {revalidatePath, revalidateTag} from "next/cache";
 
 
-export const getProfile = async () => {
+export const getAccountProfile = async () => {
 
     const {user} = await getServerSession(authOptions);
 
     try {
         const res = await fetch(`http://localhost:3000/api/profile/${user.id}`, {
-            cache: 'force-cache',
+            //cache: 'force-cache',
             next: {
                 tags: [`profileData`]
             }
@@ -37,7 +37,8 @@ export const updateProfile = async (formData) => {
 
         });
 
-        revalidateTag(`profileData`)
+        revalidateTag('profileData');
+        revalidateTag('homePost');
 
         return await res.json();
     } catch (error) {
@@ -47,12 +48,39 @@ export const updateProfile = async (formData) => {
 
 
 
-// export const profileUpload  = async (imageBlob) => {
-//     const fileUpload = imageBlob.get("fileUpload");
-//     const fileValue = fileUpload instanceof File ? fileUpload : null;
-//
-//     const {user} = await getServerSession(authOptions);
-//     const response = await firebaseUploadImage(user.id, fileValue, '');
-//
-//     console.log(response)
-// }
+export const getOtherProfile = async (userid) => {
+
+    try {
+        const res = await fetch(`http://localhost:3000/api/profile/${userid}`, {
+            //cache: 'force-cache',
+            next: {
+                tags: [`other-profile-${userid}`]
+            }
+        });
+        return await res.json();
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
+
+
+export const getUserPosts = async (userID) => {
+
+    const {user} = await getServerSession(authOptions);
+    const targetUserID = userID ? userID : user.id;
+
+    try {
+        const res = await fetch(`http://localhost:3000/api/profile/${targetUserID}/getposts`, {
+            cache: 'no-cache',
+            next: {
+                tags: [`user-post-${targetUserID}`]
+            },
+            method: 'GET'
+        })
+
+        return await res.json();
+    } catch (error) {
+        console.log('error', error)
+    }
+}

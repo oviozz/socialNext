@@ -2,6 +2,7 @@
 import connectDB from "@/lib/dbConnect";
 import Post from "@/models/Post";
 import {NextResponse} from "next/server";
+import User from "@/models/User";
 
 
 
@@ -36,6 +37,11 @@ export const POST = async (req) => { // create post
         const newPost = new Post({
             ...postData
         });
+
+        await User.updateOne(
+            {_id: postData.user},
+            { $inc: { "postCount": 1 } }
+        )
 
         await newPost.save();
 

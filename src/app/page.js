@@ -1,5 +1,4 @@
 
-import CreatePostClient from "@/components/CreatePost/CreatePostClient";
 import PostCard from "@/components/PostCard/PostCard";
 
 const getPosts = async () => {
@@ -7,7 +6,10 @@ const getPosts = async () => {
     try {
         const res = await fetch('http://localhost:3000/api/post', {
             method: 'GET',
-            cache: "no-store"
+            cache: "no-store",
+            next: {
+                tags: [`homePost`]
+            }
         })
         return await res.json();
 
@@ -30,7 +32,6 @@ export default async function Home() {
                     ))
                 }
             </div>
-
         </>
     );
 }

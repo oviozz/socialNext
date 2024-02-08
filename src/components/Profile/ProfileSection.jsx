@@ -6,14 +6,13 @@ import {redirect} from "next/navigation";
 import ProfileCompleteAlert from "@/components/ProfileCompleteAlert";
 
 
-export default function ProfileSection({profileData}){
+export default function ProfileSection({userprofile}){
 
-    const {username, email, bio, createdAt, profilePic, following, followers, postCount} = profileData;
+    const {username, email, bio, createdAt, profilePic, following, followers, postCount} = userprofile;
 
     return (
 
         <>
-
             <div className="rounded-lg">
                 <div >
                     <AvatarDisplay profilePic={profilePic} username={username} />
@@ -49,7 +48,7 @@ export default function ProfileSection({profileData}){
                 </div>
             </div>
 
-            <ProfileCompleteAlert dataConfirm={profileData}/>
+            <ProfileCompleteAlert dataConfirm={userprofile}/>
         </>
     )
 
