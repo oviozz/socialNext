@@ -27,7 +27,7 @@ export default function PostCard({postData, size}){
                         />
 
                         <div className={"flex flex-col"}>
-                            <Link href={`profile/${user._id}`}>
+                            <Link href={size ? `profile/${user._id}` : "#"}>
                                 <h2 className="font-semibold text-md hover:underline hover:cursor-pointer">{user.username}</h2>
                                 <p className="text-sm text-gray-500 dark:text-gray-400">✦ {getTimeAgo(createdAt)}</p>
                             </Link>
@@ -42,7 +42,7 @@ export default function PostCard({postData, size}){
 
                 <p className="mt-2">{caption}</p>
 
-                <div className={"flex gap-5 "}>
+                <div className={"flex gap-5"}>
                     <div className={'lg:w-[700px] w-full'}>
                         <Image
                             alt="Post image"

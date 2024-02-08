@@ -20,17 +20,17 @@ export const DELETE = async (_, {params}) => { // delete post
 
         const deletePost = await Post.findByIdAndDelete(postID)
 
-        await User.updateOne(
-            {_id: userID},
-            { $inc: { "postCount": -1 } }
-        )
+        if (deletePost){
+            await User.updateOne(
+                {_id: userID},
+                { $inc: { "postCount": -1 } }
+            )
+        }
 
         if (!deletePost) {
             return NextResponse.json({ error: "Post not found", status: 500 });
         }
 
-        revalidatePath("/")
-        revalidateTag(`user-post-${userID}`)
 
         return NextResponse.json({ message: 'Post deleted successfully', status: 200 });
 

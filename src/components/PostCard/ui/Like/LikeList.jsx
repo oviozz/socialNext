@@ -7,7 +7,7 @@ const GetLikeList = async (postID) => {
     const response = await fetch(`http://localhost:3000/api/post/${postID}/like`, {
         method: "GET",
         next: {
-            tags: [`post-${postID}`]
+            tags: [`postLikeList-${postID}`]
         }
     })
 

@@ -2,7 +2,7 @@
 import {getProfile} from "@/lib/profileFunctions/actions";
 import SettingForm from "@/components/Setting/SettingForm";
 import {Suspense} from "react";
-import SettingSkeleton from "@/components/skeleton/SettingSkeleton";
+import SettingSkeleton from "@/components/Skeleton/SettingSkeleton";
 import SettingPage from "@/components/Setting/SettingPage";
 
 async function Setting() {

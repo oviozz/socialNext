@@ -4,6 +4,7 @@ import Link from "next/link";
 import AvatarDisplay from "@/components/AvatarDisplay";
 import {redirect} from "next/navigation";
 import ProfileCompleteAlert from "@/components/ProfileCompleteAlert";
+import ProfileTools from "@/components/PostCard/ui/Profile/ProfileTools";
 
 
 export default function ProfileSection({userprofile}){
@@ -37,13 +38,9 @@ export default function ProfileSection({userprofile}){
                             <p className="text-gray-500 dark:text-gray-400">Posts</p>
                         </div>
                     </div>
+
                     <div className="flex items-center gap-4 mt-4 mb-4">
-                        <Link href={"/setting"}>
-                            <Button className="bg-gray-200 text-gray-700 dark:bg-gray-800 dark:text-gray-200" variant="solid">
-                                <SettingsIcon className="h-4 w-4 mr-1" />
-                                Edit Profile
-                            </Button>
-                        </Link>
+                        <ProfileTools />
                     </div>
                 </div>
             </div>

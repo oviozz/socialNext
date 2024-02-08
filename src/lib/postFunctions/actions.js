@@ -42,7 +42,7 @@ export const likePostHandler = async (postCardID) => {
             })
         });
 
-        revalidateTag(`post-${postCardID}`)
+        revalidateTag(`postLikeList-${postCardID}`)
         return await res.json()
 
     } catch (error) {

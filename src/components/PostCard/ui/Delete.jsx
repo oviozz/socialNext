@@ -9,7 +9,7 @@ import {
     DialogTrigger
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
-import {revalidatePath} from "next/cache";
+import {revalidatePath, revalidateTag} from "next/cache";
 import FormButton from "@/components/FormButton";
 import { MdDeleteForever } from "react-icons/md";
 
@@ -18,6 +18,11 @@ const deletePostHandler = async (deletePostID, postUserID) => {
         method: 'DELETE'
     })
 
+    // revalidatePath("/")
+    // revalidatePath("/profile")
+    revalidateTag("homePost")
+    revalidateTag(`profileData`)
+    //revalidateTag(`user-post-${deletePostID}`)
     return await res.json();
 }
 
