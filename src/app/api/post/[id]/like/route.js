@@ -35,6 +35,7 @@ export const POST = async (req, {params}) => {
         if (!post){
             return NextResponse.json({ error: "Unable to like Post", status: 500 });
         }
+
         const uniqueLikes = new Set(post.likes.map(userId => {
             return userId.toString()
         }));

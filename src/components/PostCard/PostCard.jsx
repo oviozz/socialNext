@@ -23,6 +23,7 @@ export default async function PostCard({postData, size}){
         }
     }
 
+
     return (
         <div className={`border shadow-sm rounded-lg ${maxWidth} w-full`}>
             <div className="p-4">
