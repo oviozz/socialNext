@@ -12,7 +12,7 @@ export const getAccountProfile = async (userID) => {
     const targetUserID = userID ? userID : user.id;
 
     try {
-        const res = await fetch(`http://localhost:3000/api/profile/${targetUserID}`, {
+        const res = await fetch(`${process.env.FETCH_URL}/api/profile/${targetUserID}`, {
             //cache: 'force-cache',
             next: {
                 tags: [`profileData`, `other-profile-${targetUserID}`]
@@ -30,7 +30,7 @@ export const updateProfile = async (formData) => {
     const {user} = await getServerSession(authOptions);
 
     try {
-        const res = await fetch(`http://localhost:3000/api/profile/${user.id}`, {
+        const res = await fetch(`${process.env.FETCH_URL}/api/profile/${user.id}`, {
             method: 'POST',
             headers: {
                 "Content-type": "application/json",
@@ -56,7 +56,7 @@ export const getUserPosts = async (userID) => {
     const targetUserID = userID ? userID : user.id;
 
     try {
-        const res = await fetch(`http://localhost:3000/api/profile/${targetUserID}/getposts`, {
+        const res = await fetch(`${process.env.FETCH_URL}/api/profile/${targetUserID}/getposts`, {
             cache: 'no-cache',
             next: {
                 tags: [`user-post-${targetUserID}`]

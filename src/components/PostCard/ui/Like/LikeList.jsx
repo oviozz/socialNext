@@ -4,7 +4,7 @@ import AvatarDisplay from "@/components/AvatarDisplay";
 
 
 const GetLikeList = async (postID) => {
-    const response = await fetch(`http://localhost:3000/api/post/${postID}/like`, {
+    const response = await fetch(`${process.env.FETCH_URL}/api/post/${postID}/like`, {
         method: "GET",
         next: {
             tags: [`postLikeList-${postID}`]

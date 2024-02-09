@@ -12,7 +12,7 @@ export const createPostData = async (postData) => {
 
     try{
 
-        const res = await fetch(`http://localhost:3000/api/post`, {
+        const res = await fetch(`${process.env.FETCH_URL}/api/post`, {
             method: 'POST',
             body: JSON.stringify({
                 ...postData,
@@ -35,7 +35,7 @@ export const likePostHandler = async (postCardID) => {
 
     try {
 
-        const res = await fetch(`http://localhost:3000/api/post/${postCardID}/like`, {
+        const res = await fetch(`${process.env.FETCH_URL}/api/post/${postCardID}/like`, {
             method: 'POST',
             body: JSON.stringify({
                 userId: user.id
@@ -52,7 +52,7 @@ export const likePostHandler = async (postCardID) => {
 
 
 export const deletePostHandler = async (deletePostID, postUserID) => {
-    const res = await fetch(`http://localhost:3000/api/post/${deletePostID}/delete/${postUserID}`, {
+    const res = await fetch(`${process.env.FETCH_URL}/api/post/${deletePostID}/delete/${postUserID}`, {
         method: 'DELETE'
     })
 

@@ -4,7 +4,7 @@ import PostCard from "@/components/PostCard/PostCard";
 const getPosts = async () => {
 
     try {
-        const res = await fetch('http://localhost:3000/api/post', {
+        const res = await fetch(`${process.env.FETCH_URL}/api/post`, {
             method: 'GET',
             cache: "no-store",
             next: {

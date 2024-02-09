@@ -3,7 +3,7 @@
 export const registerAuth = async (formData) => {
 
     try {
-        const res = await fetch(`http://localhost:3000/api/auth/register`, {
+        const res = await fetch(`${process.env.FETCH_URL}/api/auth/register`, {
             method: 'POST',
             headers: {
                 "Content-type": "application/json",
