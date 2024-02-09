@@ -5,10 +5,10 @@ import {getAccountProfile} from "@/lib/profileFunctions/actions";
 
 export default async function SettingPage(){
 
-    const {dbUser} = await getAccountProfile()
+    const accountProfileData = await getAccountProfile()
 
     return (
-        <SettingForm formData={dbUser}/>
+        <SettingForm formData={accountProfileData?.dbUser}/>
     )
 
 }
