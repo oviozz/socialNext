@@ -18,7 +18,7 @@ export default async function Profile({params}){
         !dbUser || status !== 200 ? <NotFound /> : (
             <main className="flex flex-1 flex-col gap-4 md:gap-5 md:p-6">
 
-                <ProfileSection userprofile={dbUser}/>
+                <ProfileSection userprofile={dbUser} otherUserID={userid}/>
                 <div>
                     <h2 className="font-semibold text-lg md:text-xl mb-4">Posts</h2>
                     <div className={"flex flex-wrap gap-4"}>

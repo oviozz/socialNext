@@ -1,5 +1,4 @@
 
-
 import Like from "@/components/PostCard/ui/Like/Like";
 import Comment from "@/components/PostCard/ui/Comment";
 import Edit from "@/components/PostCard/ui/Edit";
@@ -7,38 +6,48 @@ import DropToolMenu from "@/components/PostCard/ui/DropToolMenu";
 import Image from "next/image";
 import AvatarDisplay from "@/components/AvatarDisplay";
 import {getTimeAgo} from "@/lib/utils";
-import Link from "next/link";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import {postProfileLink} from "@/lib/postFunctions/actions";
 
-export default function PostCard({postData, size}){
-    //max-w-2xl
+export default async function PostCard({postData, size}){
+
+    const { user: sessionInfo } = await getServerSession(authOptions);
     const maxWidth = size === 'large' ? 'max-w-2xl' : 'max-w-xl';
     const {_id: postID, user, image: postImage, caption, likes, comments, createdAt} = postData;
+    const selfPost = sessionInfo.id !== user._id;
+    const postLink = async () => {
+        "use server"
+        if (selfPost){
+            await postProfileLink(user);
+        }
+    }
 
     return (
         <div className={`border shadow-sm rounded-lg ${maxWidth} w-full`}>
             <div className="p-4">
 
-                <div className={"flex justify-between"}>
-                    <div className="flex items-center gap-4 mb-4">
+                <form action={postLink} className={"flex justify-between"}>
+                    <button className="group" type={"submit"}>
 
-                        <AvatarDisplay className={"w-12 h-12"}
-                                       username={user.username}
-                                       profilePic={user.profilePic}
-                        />
+                        <div className={"flex items-center gap-3 mb-4"}>
+                            <AvatarDisplay className={`${selfPost && "group-hover:cursor-pointer"} w-12 h-12`}
+                                           username={user.username}
+                                           profilePic={user.profilePic}
+                            />
 
-                        <div className={"flex flex-col"}>
-                            <Link href={size ? `profile/${user._id}` : "#"}>
-                                <h2 className="font-semibold text-md hover:underline hover:cursor-pointer">{user.username}</h2>
-                                <p className="text-sm text-gray-500 dark:text-gray-400">✦ {getTimeAgo(createdAt)}</p>
-                            </Link>
+                            <div className={"flex flex-col"}>
+                                <h2 className={`font-semibold text-md ${selfPost ? 'group-hover:underline group-hover:cursor-pointer' : "group-hover:cursor-default"}`}>{user.username}</h2>
+                                <p className="text-sm text-gray-500 dark:text-gray-400 cursor-default">✦ {getTimeAgo(createdAt)}</p>
+                            </div>
                         </div>
-                    </div>
+                    </button>
 
                     <div>
                         <DropToolMenu postCardID={postID} postUserID={user._id} />
                     </div>
+                </form>
 
-                </div>
 
                 <p className="mt-2">{caption}</p>
 

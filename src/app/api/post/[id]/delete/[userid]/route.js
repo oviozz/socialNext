@@ -35,7 +35,7 @@ export const DELETE = async (_, {params}) => { // delete post
         return NextResponse.json({ message: 'Post deleted successfully', status: 200 });
 
     } catch (error) {
-        return NextResponse.error({ status: 500, message: 'Internal Server Error' });
+        return NextResponse.json({ message: 'Something happened. Please refresh', status: 500 });
 
     }
 

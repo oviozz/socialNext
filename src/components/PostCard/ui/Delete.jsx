@@ -1,4 +1,5 @@
 
+"use client"
 import {
     Dialog,
     DialogClose,
@@ -9,32 +10,34 @@ import {
     DialogTrigger
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
-import {revalidatePath, revalidateTag} from "next/cache";
 import FormButton from "@/components/FormButton";
 import { MdDeleteForever } from "react-icons/md";
+import {deletePostHandler} from "@/lib/postFunctions/actions";
+import {useState} from "react";
+import toast from "react-hot-toast";
 
-const deletePostHandler = async (deletePostID, postUserID) => {
-    const res = await fetch(`http://localhost:3000/api/post/${deletePostID}/delete/${postUserID}`, {
-        method: 'DELETE'
-    })
 
-    // revalidatePath("/")
-    // revalidatePath("/profile")
-    revalidateTag("homePost")
-    revalidateTag(`profileData`)
-    //revalidateTag(`user-post-${deletePostID}`)
-    return await res.json();
-}
 
 export default function Delete({deletePostID, postUserID}){
+
+    const [open, setOpen] = useState(false)
+
     const onDelete = async () => {
-        "use server"
         const res = await deletePostHandler(deletePostID, postUserID);
+
+        switch (res.status){
+            case 200:
+                setOpen(false);
+                break;
+            case 500:
+                toast.error(res.message);
+                break;
+        }
 
     }
 
     return (
-        <Dialog>
+        <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
                 <Button size="sm" variant="ghost" className={"text-red-500 hover:text-red-500"}>
                     <TrashIcon className="h-4 w-4 mr-1" />

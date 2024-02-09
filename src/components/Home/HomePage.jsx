@@ -1,6 +1,5 @@
 
 import PostCard from "@/components/PostCard/PostCard";
-import PostSkeleton from "@/components/Skeleton/PostSkeleton";
 
 const getPosts = async () => {
 

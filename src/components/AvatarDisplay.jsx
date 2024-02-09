@@ -21,7 +21,7 @@ const AvatarDisplay = ({profilePic, username, className}) => {
                     )
                     :
                     <Avatar className={cn("w-28 h-28 border", className)}>
-                        <AvatarFallback className={"text-2xl font-bold"}>{username[0]}</AvatarFallback>
+                        <AvatarFallback className={"text-3xl font-bold"}>{username[0]}</AvatarFallback>
                     </Avatar>
             }
         </>

@@ -4,10 +4,10 @@ import Link from "next/link";
 import AvatarDisplay from "@/components/AvatarDisplay";
 import {redirect} from "next/navigation";
 import ProfileCompleteAlert from "@/components/ProfileCompleteAlert";
-import ProfileTools from "@/components/PostCard/ui/Profile/ProfileTools";
+import ProfileTools from "@/components/Profile/ProfileTools";
 
 
-export default function ProfileSection({userprofile}){
+export default function ProfileSection({userprofile, otherUserID}){
 
     const {username, email, bio, createdAt, profilePic, following, followers, postCount} = userprofile;
 
@@ -40,7 +40,7 @@ export default function ProfileSection({userprofile}){
                     </div>
 
                     <div className="flex items-center gap-4 mt-4 mb-4">
-                        <ProfileTools />
+                        <ProfileTools otherUserID={otherUserID}/>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+
 import PostCard from "@/components/PostCard/PostCard";
 import {getUserPosts} from "@/lib/profileFunctions/actions";
 

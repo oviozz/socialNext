@@ -3,8 +3,8 @@
 
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
-import connectDB from "@/lib/dbConnect";
-import {revalidatePath, revalidateTag} from "next/cache";
+import {revalidateTag} from "next/cache";
+import {redirect} from "next/navigation";
 
 export const createPostData = async (postData) => {
 
@@ -48,4 +48,21 @@ export const likePostHandler = async (postCardID) => {
     } catch (error) {
         console.log(error)
     }
+}
+
+
+export const deletePostHandler = async (deletePostID, postUserID) => {
+    const res = await fetch(`http://localhost:3000/api/post/${deletePostID}/delete/${postUserID}`, {
+        method: 'DELETE'
+    })
+
+    revalidateTag("homePost")
+    revalidateTag(`profileData`)
+    return await res.json();
+}
+
+
+export const postProfileLink = async (user) => {
+    redirect(`profile/${user._id}`);
+
 }
