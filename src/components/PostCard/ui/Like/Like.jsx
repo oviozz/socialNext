@@ -8,16 +8,16 @@ import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 
-export default async function Like({postCardID, likes}){
+export default async function Like({userID, postCardID, likes}){
 
-    const {user} = await getServerSession(authOptions);
+    //const {user} = await getServerSession(authOptions);
 
     return (
         <div className={"flex items-center"}>
 
             <Dialog>
 
-                <LikeText likeList={likes} postCardID={postCardID} userId={user?.id}/>
+                <LikeText likeList={likes} postCardID={postCardID} userId={userID}/>
 
                 <DialogContent>
                     <DialogHeader>

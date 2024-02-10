@@ -48,16 +48,16 @@ const CreatePostForm = ({closeModal}) => {
             imageURL  = await firebaseUploadImage('posts',userId, postImage, uniqueIdentifier);
 
             const response = await createPostData({...postForm, image: imageURL});
-            closeModal();
-            // switch (response.status){
-            //     case 200:
-            //         toast.success(response.message);
-            //         closeModal();
-            //         break;
-            //     case 500:
-            //         toast.error(response.message);
-            //         break;
-            // }
+
+            switch (response.status){
+                case 200:
+                    toast.success(response.message);
+                    closeModal();
+                    break;
+                case 500:
+                    toast.error(response.message);
+                    break;
+            }
         }
 
     }

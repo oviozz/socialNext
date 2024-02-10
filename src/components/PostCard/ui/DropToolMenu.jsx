@@ -8,9 +8,8 @@ import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 
-export default async function DropToolMenu({postUserID, postCardID}){
+export default async function DropToolMenu({userID, postUserID, postCardID}){
 
-    const session = await getServerSession(authOptions);
 
     return (
         <DropdownMenu >
@@ -22,7 +21,7 @@ export default async function DropToolMenu({postUserID, postCardID}){
 
             <DropdownMenuContent className={"flex flex-col"} align="end">
                 <Share shareID={postCardID}/>
-                {postUserID === session?.user.id ? <Delete deletePostID={postCardID} postUserID={postUserID}/> : null}
+                {postUserID === userID ? <Delete deletePostID={postCardID} postUserID={postUserID}/> : null}
             </DropdownMenuContent>
         </DropdownMenu>
     )

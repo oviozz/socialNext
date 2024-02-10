@@ -12,10 +12,12 @@ import {postProfileLink} from "@/lib/postFunctions/actions";
 
 export default async function PostCard({postData, size}){
 
-    const { user: sessionInfo } = await getServerSession(authOptions);
+    const session = await getServerSession(authOptions);
+    const userID = session?.user.id;
     const maxWidth = size === 'large' ? 'max-w-2xl' : 'max-w-xl';
     const {_id: postID, user, image: postImage, caption, likes, comments, createdAt} = postData;
-    const selfPost = sessionInfo.id !== user._id;
+    const selfPost = userID !== user._id;
+
     const postLink = async () => {
         "use server"
         if (selfPost){
@@ -45,7 +47,7 @@ export default async function PostCard({postData, size}){
                     </button>
 
                     <div>
-                        <DropToolMenu postCardID={postID} postUserID={user._id} />
+                        <DropToolMenu userID={userID} postCardID={postID} postUserID={user._id} />
                     </div>
                 </form>
 
@@ -66,7 +68,7 @@ export default async function PostCard({postData, size}){
                 </div>
 
                 <div className="flex items-center mt-4 justify-between lg:justify-normal select-none">
-                    <Like postCardID={postID} likes={likes}/>
+                    <Like postCardID={postID} likes={likes} userID={userID}/>
                     <Comment />
                     <Edit />
                 </div>
