@@ -14,6 +14,9 @@ export const createPostData = async (postData) => {
 
         const res = await fetch(`${process.env.FETCH_URL}/api/post`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 ...postData,
                 user: user.id,
@@ -37,6 +40,9 @@ export const likePostHandler = async (postCardID) => {
 
         const res = await fetch(`${process.env.FETCH_URL}/api/post/${postCardID}/like`, {
             method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 userId: user.id
             })

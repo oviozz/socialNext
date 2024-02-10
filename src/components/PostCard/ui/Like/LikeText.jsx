@@ -23,6 +23,7 @@ export default function LikeText({likeList, postCardID, userId}){
     }, [postCardID, hasLikedPost, likeList.length]);
 
     const likePost = async () => {
+
         const response = await likePostHandler(postCardID);
 
         switch (response.status) {

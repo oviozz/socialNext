@@ -24,7 +24,7 @@ export default function SideLinks({className}){
     ];
 
     return (
-        <nav className={cn("grid items-start px-4 text-md font-medium", className)}>
+        <nav className={cn("grid items-start px-4 text-sm font-medium", className)}>
             <div className={""}>
                 {
                     linksData.map((link, index) => (

@@ -9,7 +9,6 @@ export const registerAuth = async (formData) => {
                 "Content-type": "application/json",
             },
             body: JSON.stringify(formData),
-            "content-type": "application/json"
         });
 
 

@@ -75,6 +75,9 @@ export const followUser = async (profileID) => {
     const { user } = await getServerSession(authOptions)
     const response = await fetch(`${process.env.FETCH_URL}/api/profile/${profileID}/followUser`, {
         method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify({userID: user.id})
     })
 

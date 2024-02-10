@@ -19,7 +19,7 @@ export const GET = async () => { // get all post
     } catch (error) {
         console.error('Error fetching posts:', error.message);
 
-        return NextResponse.error({ status: 500, message: 'Internal Server Error' });
+        return NextResponse.json({ status: 500, message: 'Internal Server Error' });
     }
 
 }
@@ -29,7 +29,6 @@ export const GET = async () => { // get all post
 export const POST = async (req) => { // create post
 
     await connectDB();
-
     const postData = await req.json();
 
     try {
