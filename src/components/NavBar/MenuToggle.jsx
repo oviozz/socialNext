@@ -1,26 +1,31 @@
-import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
+
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet"
 import {Button} from "@/components/ui/button";
-import {Moon, Sun} from "lucide-react";
 import * as React from "react";
+import SideLinks from "@/components/SideBar/SideLinks";
 
 
 export default function MenuToggle(){
 
     return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild className="lg:hidden">
+        <Sheet>
+            <SheetTrigger asChild className="lg:hidden">
                 <Button size="icon" variant="outline">
                     <MenuIcon className="h-6 w-6" />
                     <span className="sr-only">Toggle sidebar</span>
                 </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-
-                <DropdownMenuItem >
-                    Logout
-                </DropdownMenuItem>
-            </DropdownMenuContent>
-        </DropdownMenu>
+            </SheetTrigger>
+            <SheetContent side={"left"} align="end">
+                <SideLinks className={"px-0 mt-10 text-md"}/>
+            </SheetContent>
+        </Sheet>
     )
 
 

@@ -1,11 +1,9 @@
 
-import {getAccountProfile, getOtherProfile} from "@/lib/profileFunctions/actions";
+import {getAccountProfile} from "@/lib/profileFunctions/actions";
 import ProfileSection from "@/components/Profile/ProfileSection";
 import NotFound from "@/components/NotFound";
 import ProfilePosts from "@/components/Profile/ProfilePosts";
 import {Suspense} from "react";
-import {getServerSession} from "next-auth";
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import PostSkeleton from "@/components/Skeleton/PostSkeleton";
 
 
