@@ -31,3 +31,23 @@ export function getTimeAgo(createdAtStr) {
     return `${seconds} seconds ago`;
   }
 }
+
+export function convertDateStringToJoinedString(dateString) {
+
+  console.log(dateString)
+  // Extract year and month from the date string
+  const year = parseInt(dateString.substring(0, 4));
+  const monthIndex = parseInt(dateString.substring(5, 7)) - 1; // Month index starts from 0
+
+  // Deduct three years from the obtained year
+  const adjustedYear = year - 3;
+
+  // Define an array to map month indices to month names
+  const monthNames = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  // Format the result as "Joined Month Year"
+  return `Joined ${monthNames[monthIndex]} ${adjustedYear}`;
+}

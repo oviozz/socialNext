@@ -69,3 +69,14 @@ export const getUserPosts = async (userID) => {
         console.log('error', error)
     }
 }
+
+export const followUser = async (profileID) => {
+
+    const { user } = await getServerSession(authOptions)
+    const response = await fetch(`${process.env.FETCH_URL}/api/profile/${profileID}/followUser`, {
+        method: "POST",
+        body: JSON.stringify({userID: user.id})
+    })
+
+    revalidateTag(`other-profile-${profileID}`)
+}

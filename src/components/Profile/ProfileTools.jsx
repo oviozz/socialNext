@@ -3,12 +3,20 @@ import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+import {followUser} from "@/lib/profileFunctions/actions";
+import FormButton from "@/components/FormButton";
 
-export default async function ProfileTools({otherUserID}){
+export default async function ProfileTools({otherUserID, followers}){
 
     const { user: sessionInfo } = await getServerSession(authOptions);
     const otherID = Array.isArray(otherUserID) ? otherUserID[0] : otherUserID;
+    // const isFollowing = followers.includes(sessionInfo.id) ? "Following" : "Follow"
+    const isFollowing = followers.some(user => user._id === sessionInfo.id) ? "Following" : "Follow"
 
+    const followUserHandler = async () => {
+        "use server"
+        await followUser(otherID)
+    }
 
     return (
         <>
@@ -24,11 +32,9 @@ export default async function ProfileTools({otherUserID}){
                     )
                     : (
                     <div>
-                        <Button className="mt-1 bg-blue-400 text-white border dark:bg-blue-500 dark:text-gray-200" variant="solid">
-                            <UsersIcon className="h-4 w-4 mr-1" />
-                            Follow Profile
-                        </Button>
-
+                        <form action={followUserHandler}>
+                            <FormButton className={"mt-1 border bg-purple-500"} text={isFollowing} icon={<UsersIcon />} disable={true}/>
+                        </form>
                     </div>
                 )
             }

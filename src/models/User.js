@@ -28,18 +28,16 @@ const userSchema = new Schema(
         },
         following: [
             {
-                userId: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: 'User',
-                },
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                default: []
             }
         ],
         followers: [
             {
-                userId: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: 'User',
-                },
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                default: []
             }
         ],
         postCount: {

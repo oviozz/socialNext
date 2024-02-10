@@ -37,7 +37,7 @@ export default async function PostCard({postData, size}){
                                            profilePic={user.profilePic}
                             />
 
-                            <div className={"flex flex-col"}>
+                            <div className={"flex flex-col items-start"}>
                                 <h2 className={`font-semibold text-md ${selfPost ? 'group-hover:underline group-hover:cursor-pointer' : "group-hover:cursor-default"}`}>{user.username}</h2>
                                 <p className="text-sm text-gray-500 dark:text-gray-400 cursor-default">✦ {getTimeAgo(createdAt)}</p>
                             </div>

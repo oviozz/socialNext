@@ -18,7 +18,9 @@ export const GET = async (_, {params}) => {
     }
 
     try {
-        const dbUser = await User.findById(userID);
+        const dbUser = await User.findById(userID)
+            .populate("following")
+            .populate("followers")
 
         return NextResponse.json({ dbUser ,  status: 200 });
     } catch (error) {

@@ -7,6 +7,7 @@ import {clsx} from "clsx";
 import {usePathname} from "next/navigation";
 import AuthButton from "@/components/SideBar/AuthButton";
 import {useSession} from "next-auth/react";
+import {Separator} from "@/components/ui/separator";
 
 
 export default function SideLinks(){
@@ -22,25 +23,27 @@ export default function SideLinks(){
     ];
 
     return (
-        <nav className="grid items-start px-4 text-sm font-medium">
-            {
-                linksData.map((link, index) => (
-                    <Link
-                        className={clsx(
-                            "flex items-center gap-3 rounded-md px-3 py-2 text-gray-500 transition-all dark:text-gray-400 dark:hover:text-gray-100 hover:text-gray-900",
-                            {
-                                "bg-gray-200 dark:bg-gray-800 dark:text-white text-black hover:text-black" : pathname === link.href
-                            }
-                        )}
-                        key={index}
-                        style={index === linksData.length - 1 ? { marginTop: 'auto' } : {}}
-                        href={link.href}>
-                        {React.createElement(link.icon, { className: "h-4 w-4" })}
-                        {link.name}
-                    </Link>
-                ))
-            }
-
+        <nav className="grid items-start px-4 text-md font-medium">
+            <div className={""}>
+                {
+                    linksData.map((link, index) => (
+                        <Link
+                            className={clsx(
+                                "flex items-center gap-3 rounded-md px-3 py-2 text-gray-500 transition-all dark:text-gray-400 dark:hover:text-gray-100 hover:text-gray-900",
+                                {
+                                    "bg-gray-200 font-bold dark:bg-gray-800 dark:text-white text-black hover:text-black" : pathname === link.href
+                                }
+                            )}
+                            key={index}
+                            style={index === linksData.length - 1 ? { marginTop: 'auto' } : {}}
+                            href={link.href}>
+                            {React.createElement(link.icon, { className: "h-4 w-4" })}
+                            {link.name}
+                        </Link>
+                    ))
+                }
+            </div>
+            <Separator className={"my-3 w-full"} />
             <AuthButton session={session}/>
         </nav>
     )

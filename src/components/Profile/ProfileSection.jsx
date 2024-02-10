@@ -1,13 +1,12 @@
 
-import {Button} from "@/components/ui/button";
-import Link from "next/link";
 import AvatarDisplay from "@/components/AvatarDisplay";
-import {redirect} from "next/navigation";
 import ProfileCompleteAlert from "@/components/ProfileCompleteAlert";
 import ProfileTools from "@/components/Profile/ProfileTools";
+import FollowerList from "@/components/Profile/FollowerList";
+import FollowingList from "@/components/Profile/FollowingList";
 
 
-export default function ProfileSection({userprofile, otherUserID}){
+export default async function ProfileSection({userprofile, otherUserID}){
 
     const {username, email, bio, createdAt, profilePic, following, followers, postCount} = userprofile;
 
@@ -25,22 +24,20 @@ export default function ProfileSection({userprofile, otherUserID}){
                     </div>
 
                     <div className="grid grid-cols-3 gap-4 my-4">
+
+                        <FollowingList followings={following} />
+
+                        <FollowerList followers={followers}/>
+
                         <div>
-                            <h3 className="font-semibold">{following.length}</h3>
-                            <p className="text-gray-500 dark:text-gray-400">Following</p>
-                        </div>
-                        <div>
-                            <h3 className="font-semibold">{followers.length}</h3>
-                            <p className="text-gray-500 dark:text-gray-400">Followers</p>
-                        </div>
-                        <div>
-                            <h3 className="font-semibold">{postCount}</h3>
+                            <h3 className="font-bold">{postCount}</h3>
                             <p className="text-gray-500 dark:text-gray-400">Posts</p>
                         </div>
+
                     </div>
 
                     <div className="flex items-center gap-4 mt-4 mb-4">
-                        <ProfileTools otherUserID={otherUserID}/>
+                        <ProfileTools followers={followers} otherUserID={otherUserID}/>
                     </div>
                 </div>
             </div>
