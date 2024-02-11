@@ -9,8 +9,6 @@ import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 const NavBar = async () => {
 
-    const session = await getServerSession(authOptions);
-
     return (
         <nav className="flex p-4 h-14 lg:h-[60px] items-center justify-between gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
             <form className={"lg:w-1/2 md:w-1/2 w-full"}>

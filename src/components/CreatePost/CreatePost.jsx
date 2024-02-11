@@ -1,16 +1,19 @@
 
-import {getServerSession} from "next-auth";
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
+"use client"
+
 import CreatePostClient from "@/components/CreatePost/CreatePostClient";
+import {useEffect, useState} from "react";
+import {useSession} from "next-auth/react";
 
-const CreatePost = async () => {
+const CreatePost = () => {
+    const { data: sessionData } = useSession();
+    const [isSessionActive, setIsSessionActive] = useState(Boolean(sessionData));
 
-    const session = getServerSession(authOptions);
+    useEffect(() => {
+        setIsSessionActive(Boolean(sessionData));
+    }, [sessionData]);
 
-    return (
-        <CreatePostClient session={session}/>
-    )
-
+    return isSessionActive ? <CreatePostClient session={sessionData}/> : null;
 }
 
 export default CreatePost;

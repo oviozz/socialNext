@@ -35,7 +35,6 @@ export default function Login(){
             password,
             redirect: false,
         }).then((res) => {
-            console.log(res)
             if (res?.error) {
                 toast.error( "Invalid email or password" );
             } else {
