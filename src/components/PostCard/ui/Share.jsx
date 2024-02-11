@@ -4,11 +4,10 @@ import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 
-
-export default function Share({onClick, shareID}){
+export default function Share({shareID}){
     return (
         <Dialog>
-            <DialogTrigger onClick={onClick} asChild>
+            <DialogTrigger asChild>
                 <Button size="sm" variant="ghost">
                     <ShareIcon className="h-4 w-4 mr-1" />
                     Share

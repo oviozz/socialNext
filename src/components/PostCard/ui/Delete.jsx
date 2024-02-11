@@ -28,6 +28,7 @@ export default function Delete({deletePostID, postUserID}){
         switch (res.status){
             case 200:
                 setOpen(false);
+                toast.success(res.message);
                 break;
             case 500:
                 toast.error(res.message);

@@ -4,12 +4,10 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@/componen
 import {Button} from "@/components/ui/button";
 import Share from "@/components/PostCard/ui/Share";
 import Delete from "@/components/PostCard/ui/Delete";
-import {getServerSession} from "next-auth";
-import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
+// prevent post creat before they complete it
 
 export default async function DropToolMenu({userID, postUserID, postCardID}){
-
 
     return (
         <DropdownMenu >
@@ -29,6 +27,7 @@ export default async function DropToolMenu({userID, postUserID, postCardID}){
 
 
 function MoreHorizontalIcon(props) {
+
     return (
         <svg
             {...props}
