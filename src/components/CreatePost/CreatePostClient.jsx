@@ -6,7 +6,7 @@ import {Button} from "@/components/ui/button";
 import CreatePostForm from "@/components/CreatePost/CreatePostForm";
 import {useState} from "react";
 
-function CreatePostClient(){ //h-scrren
+function CreatePostClient({session}){ //h-scrren
 
     const [open, setOpen] = useState(false);
     const closeDialog = () => {
@@ -14,24 +14,26 @@ function CreatePostClient(){ //h-scrren
     }
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-                <Button size="sm" variant="outline">
-                    <PlusIcon className="h-5 w-5 mr-1" />
-                    <span className={"lg:block hidden"}>Create Post</span>
-                </Button>
-            </DialogTrigger>
+        session && (
+            <Dialog open={open} onOpenChange={setOpen}>
+                <DialogTrigger asChild>
+                    <Button size="sm" variant="outline">
+                        <PlusIcon className="h-5 w-5 mr-1" />
+                        <span className={"lg:block hidden"}>Create Post</span>
+                    </Button>
+                </DialogTrigger>
 
-            <DialogContent className={"rounded-md lg:h-fit"}>
-                <DialogHeader>
-                    <DialogTitle>Create a New Post</DialogTitle>
-                </DialogHeader>
+                <DialogContent className={"rounded-md lg:h-fit"}>
+                    <DialogHeader>
+                        <DialogTitle>Create a New Post</DialogTitle>
+                    </DialogHeader>
 
-                <div className="grid gap-4 py-4">
-                    <CreatePostForm closeModal={closeDialog} />
-                </div>
-            </DialogContent>
-        </Dialog>
+                    <div className="grid gap-4 py-4">
+                        <CreatePostForm closeModal={closeDialog} />
+                    </div>
+                </DialogContent>
+            </Dialog>
+        )
     )
 
 

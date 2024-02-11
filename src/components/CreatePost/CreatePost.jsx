@@ -8,7 +8,7 @@ const CreatePost = async () => {
     const session = getServerSession(authOptions);
 
     return (
-        !session ? null : <CreatePostClient />
+        <CreatePostClient session={session}/>
     )
 
 }

@@ -26,7 +26,7 @@ const NavBar = async () => {
 
             <div className={"flex items-center gap-2"}>
 
-                {session ? <CreatePost /> : null}
+                <CreatePost />
                 <div className={"lg:flex hidden"}>
                     <ThemeToggle />
                 </div>
