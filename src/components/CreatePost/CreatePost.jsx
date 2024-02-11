@@ -5,12 +5,11 @@ import CreatePostClient from "@/components/CreatePost/CreatePostClient";
 
 const CreatePost = async () => {
 
-    //{user} = await getServerSession(authOptions);
+    const session = getServerSession(authOptions);
 
-    //const user = session && session.user ? session.user : null;
-    //const { user } = session;
-
-    return <CreatePostClient />
+    return (
+        !session ? null : <CreatePostClient />
+    )
 
 }
 
