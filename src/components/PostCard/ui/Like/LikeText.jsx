@@ -24,16 +24,19 @@ export default function LikeText({likeList, postCardID, userId}){
 
     const likePost = async () => {
 
-        const response = await likePostHandler(postCardID);
+        if (userId){
+            const response = await likePostHandler(postCardID);
 
-        switch (response.status) {
-            case 500:
-                setIsLiked(false);
-                setLikes((prevLikes) => prevLikes - 1);
-                break;
-            default:
-                break;
+            switch (response.status) {
+                case 500:
+                    setIsLiked(false);
+                    setLikes((prevLikes) => prevLikes - 1);
+                    break;
+                default:
+                    break;
+            }
         }
+
     }
 
     const countLike = async () => {
