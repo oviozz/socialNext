@@ -14,8 +14,9 @@ import toast from "react-hot-toast";
 import FormButton from "@/components/FormButton";
 import { v4 as uuidv4 } from 'uuid';
 
-const CreatePostForm = ({closeModal}) => {
+const CreatePostForm = ({closeModal, userValidate}) => {
 
+    const { username, bio } = userValidate;
     const { data: { user: { id: userId } } } = useSession();
     const [postImage, setPostImage] = useState("")
     const [postForm, setPostForm] = useState({
@@ -63,6 +64,8 @@ const CreatePostForm = ({closeModal}) => {
     }
 
     const isFormComplete = postImage && postForm.caption
+    const isUserComplete = username && bio;
+    const userInfoValidate = isUserComplete ? "Submit" : "Please complete your profile first"
 
     return (
         <>
@@ -75,7 +78,7 @@ const CreatePostForm = ({closeModal}) => {
                     <Textarea name={"caption"} value={postForm.caption} onChange={handleInputChange} autoComplete="off" className={"resize-none h-32 sm:h-20 lg:h-32"} id="post-content" placeholder="Enter post content" />
                 </div>
 
-                <FormButton text={'Submit'} disable={isFormComplete} icon={<BsFillSendPlusFill size={20}/>}/>
+                <FormButton className={!isUserComplete ? "bg-red-500" : null} text={userInfoValidate} disable={isFormComplete && isUserComplete} icon={<BsFillSendPlusFill size={20}/>}/>
             </form>
         </>
     )

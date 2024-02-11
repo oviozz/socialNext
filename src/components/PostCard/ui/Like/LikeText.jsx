@@ -7,10 +7,9 @@ import {useEffect, useState} from "react";
 import {FaHeart} from "react-icons/fa";
 import {likePostHandler} from "@/lib/postFunctions/actions";
 import {useSession} from "next-auth/react";
+import toast from "react-hot-toast";
 
 export default function LikeText({likeList, postCardID, userId}){
-
-    // const { data: { user: { id: userId } } } = useSession();
 
     const hasLikedPost = likeList.includes(userId);
     const [isLiked, setIsLiked] = useState(hasLikedPost);
@@ -40,8 +39,12 @@ export default function LikeText({likeList, postCardID, userId}){
     }
 
     const countLike = async () => {
-        setIsLiked(prev => !prev)
-        setLikes((prevLikes) => (isLiked ? prevLikes - 1 : prevLikes + 1));
+        if (userId){
+            setIsLiked(prev => !prev)
+            setLikes((prevLikes) => (isLiked ? prevLikes - 1 : prevLikes + 1));
+        } else {
+            toast.error("Please login to like the post")
+        }
     }
 
     return (

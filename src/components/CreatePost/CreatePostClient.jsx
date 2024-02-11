@@ -5,7 +5,7 @@ import {Button} from "@/components/ui/button";
 import CreatePostForm from "@/components/CreatePost/CreatePostForm";
 import {useState} from "react";
 
-function CreatePostClient(){ //h-scrren
+function CreatePostClient({dataValidate}){ //h-scrren
 
     const [open, setOpen] = useState(false);
     const closeDialog = () => {
@@ -27,7 +27,7 @@ function CreatePostClient(){ //h-scrren
                 </DialogHeader>
 
                 <div className="grid gap-4 py-4">
-                    <CreatePostForm closeModal={closeDialog} />
+                    <CreatePostForm userValidate={dataValidate} closeModal={closeDialog} />
                 </div>
             </DialogContent>
         </Dialog>

@@ -1,11 +1,19 @@
 
 "use client"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogDescription,
+    DialogFooter,
+    DialogClose
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import {useEffect, useState} from "react";
 import Link from "next/link";
 
-export default function ProfileCompleteAlert({dataConfirm}) {
+export default function ProfileCompleteAlert({dataConfirm, page}) {
 
     const [isClient, setIsClient] = useState(false)
 
@@ -24,9 +32,11 @@ export default function ProfileCompleteAlert({dataConfirm}) {
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter>
-                    <Link href={"/setting"}>
-                        <Button>Navigate to Settings</Button>
-                    </Link>
+                    <DialogClose>
+                        <Link href={"/setting"}>
+                            <Button>Navigate to Settings</Button>
+                        </Link>
+                    </DialogClose>
                 </DialogFooter>
             </DialogContent>
         </Dialog>

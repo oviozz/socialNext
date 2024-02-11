@@ -10,7 +10,6 @@ export default async function ProfileTools({otherUserID, followers}){
 
     const { user: sessionInfo } = await getServerSession(authOptions);
     const otherID = Array.isArray(otherUserID) ? otherUserID[0] : otherUserID;
-    // const isFollowing = followers.includes(sessionInfo.id) ? "Following" : "Follow"
     const isFollowing = followers.some(user => user._id === sessionInfo.id) ? "Following" : "Follow"
 
     const followUserHandler = async () => {

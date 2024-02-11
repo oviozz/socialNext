@@ -8,8 +8,8 @@ import {revalidatePath, revalidateTag} from "next/cache";
 
 export const getAccountProfile = async (userID) => {
 
-    const {user} = await getServerSession(authOptions);
-    const targetUserID = userID ? userID : user.id;
+    const session = await getServerSession(authOptions);
+    const targetUserID = userID ? userID : session?.user.id;
 
     try {
         const res = await fetch(`${process.env.FETCH_URL}/api/profile/${targetUserID}`, {
