@@ -7,7 +7,7 @@ import Image from "next/image";
 import {useState} from "react";
 
 
-const ImageLoad = ({imageSet}) => {
+const ImageLoad = ({disabled, imageSet}) => {
 
     const [imagePreview, setImagePreview] = useState(null);
 
@@ -28,7 +28,7 @@ const ImageLoad = ({imageSet}) => {
         <>
             <div className="space-y-2">
                 <Label htmlFor="post-image">Upload Image</Label>
-                <Input type="file" id="post-image" accept="image/*" onChange={handleFileChange}/>
+                <Input disabled={disabled} type="file" id="post-image" accept="image/*" onChange={handleFileChange}/>
             </div>
 
             {

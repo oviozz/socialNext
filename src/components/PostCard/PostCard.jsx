@@ -9,6 +9,7 @@ import {getTimeAgo} from "@/lib/utils";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 import {postProfileLink} from "@/lib/postFunctions/actions";
+import Link from "next/link";
 
 export default async function PostCard({postData, size}){
 
@@ -18,20 +19,13 @@ export default async function PostCard({postData, size}){
     const {_id: postID, user, image: postImage, caption, likes, comments, createdAt} = postData;
     const selfPost = userID !== user._id;
 
-    const postLink = async () => {
-        "use server"
-        if (selfPost){
-            await postProfileLink(user);
-        }
-    }
-
 
     return (
         <div className={`border shadow-sm rounded-lg ${maxWidth} w-full`}>
             <div className="p-4">
 
-                <form action={postLink} className={"flex justify-between"}>
-                    <button className="group" type={"submit"}>
+                <div className={"flex justify-between"}>
+                    <Link href={selfPost ? `profile/${user._id}` : "#"} className={`group ${!selfPost && 'pointer-events-none'}`} type={"submit"}>
 
                         <div className={"flex items-center gap-3 mb-4"}>
                             <AvatarDisplay className={`${selfPost && "group-hover:cursor-pointer"} w-12 h-12`}
@@ -44,12 +38,12 @@ export default async function PostCard({postData, size}){
                                 <p className="text-sm text-gray-500 dark:text-gray-400 cursor-default">✦ {getTimeAgo(createdAt)}</p>
                             </div>
                         </div>
-                    </button>
+                    </Link>
 
                     <div>
                         <DropToolMenu userID={userID} postCardID={postID} postUserID={user._id} />
                     </div>
-                </form>
+                </div>
 
 
                 <p className="mt-2">{caption}</p>

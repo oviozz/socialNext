@@ -15,7 +15,7 @@ const CreatePost = ({dataValidate}) => {
         setIsSessionActive(Boolean(sessionData));
     }, [sessionData]);
 
-    return isSessionActive ? <CreatePostClient session={sessionData} dataValidate={dataValidate}/> : null;
+    return (isSessionActive) ? <CreatePostClient session={sessionData} dataValidate={dataValidate}/> : null ;
 }
 
 export default CreatePost;

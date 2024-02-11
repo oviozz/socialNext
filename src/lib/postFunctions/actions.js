@@ -67,8 +67,3 @@ export const deletePostHandler = async (deletePostID, postUserID) => {
     return await res.json();
 }
 
-
-export const postProfileLink = async (user) => {
-    redirect(`profile/${user._id}`);
-
-}

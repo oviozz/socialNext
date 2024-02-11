@@ -65,17 +65,17 @@ const CreatePostForm = ({closeModal, userValidate}) => {
 
     const isFormComplete = postImage && postForm.caption
     const isUserComplete = username && bio;
-    const userInfoValidate = isUserComplete ? "Submit" : "Please complete your profile first"
+    const userInfoValidate = isUserComplete ? "Submit" : "Please complete your setting first"
 
     return (
         <>
             <form className={"flex flex-col gap-3"} action={createPostHandler}>
 
-                <ImageLoad imageSet={setImageFile}/>
+                <ImageLoad disabled={!isUserComplete} imageSet={setImageFile}/>
 
                 <div className="space-y-2">
                     <Label htmlFor="post-content">Describe your post</Label>
-                    <Textarea name={"caption"} value={postForm.caption} onChange={handleInputChange} autoComplete="off" className={"resize-none h-32 sm:h-20 lg:h-32"} id="post-content" placeholder="Enter post content" />
+                    <Textarea disabled={!isUserComplete} name={"caption"} value={postForm.caption} onChange={handleInputChange} autoComplete="off" className={"resize-none h-32 sm:h-20 lg:h-32"} id="post-content" placeholder="Enter post content" />
                 </div>
 
                 <FormButton className={!isUserComplete ? "bg-red-500" : null} text={userInfoValidate} disable={isFormComplete && isUserComplete} icon={<BsFillSendPlusFill size={20}/>}/>
