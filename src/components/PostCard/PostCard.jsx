@@ -8,7 +8,6 @@ import AvatarDisplay from "@/components/AvatarDisplay";
 import {getTimeAgo} from "@/lib/utils";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";
-import {postProfileLink} from "@/lib/postFunctions/actions";
 import Link from "next/link";
 
 export default async function PostCard({postData, size}){

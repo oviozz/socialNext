@@ -1,10 +1,7 @@
 
 import {getAccountProfile} from "@/lib/profileFunctions/actions";
 import ProfileSection from "@/components/Profile/ProfileSection";
-import NotFound from "@/components/NotFound";
-import ProfilePosts from "@/components/Profile/ProfilePosts";
-import {Suspense} from "react";
-import PostSkeleton from "@/components/Skeleton/PostSkeleton";
+import {notFound} from "next/navigation";
 
 export default async function ProfilePage({params}){
 
@@ -12,7 +9,7 @@ export default async function ProfilePage({params}){
     const {dbUser, status} = await getAccountProfile(userid);
 
     return (
-        !dbUser || status !== 200 && (
+        !dbUser || status !== 200 ? notFound() : (
             <ProfileSection userprofile={dbUser} otherUserID={userid}/>
         )
     )
