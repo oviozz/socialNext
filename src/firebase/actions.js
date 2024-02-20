@@ -1,6 +1,6 @@
 
 
-import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import {getDownloadURL, getStorage, ref, uploadBytes, deleteObject} from "firebase/storage";
 import firebase_app from "@/firebase/config";
 
 
@@ -19,3 +19,4 @@ export async function firebaseUploadImage(path, userID, imageBlob, unique = null
         return null;
     }
 }
+

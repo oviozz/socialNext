@@ -20,7 +20,7 @@ export default function Share({shareID}){
                 <div className="grid gap-4 py-4">
                     <p>Copy the link below to share this post:</p>
                     <div className={"flex items-center gap-4"}>
-                        <Input disabled defaultValue={`https://www.website.com/post/${shareID}`} />
+                        <Input disabled defaultValue={`${process.env.FETCH_URL}/${shareID}`} />
 
                         <Button >
                             <CopyIcon className="h-4 w-4 mr-2" />

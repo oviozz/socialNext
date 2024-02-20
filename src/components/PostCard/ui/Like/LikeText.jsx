@@ -51,7 +51,7 @@ export default function LikeText({likeList, postCardID, userId}){
         <>
             <form className={"flex items-center"} action={likePost}>
                 <button type={"submit"} onClick={countLike}>
-                    <FaHeart size={20} className={isLiked ? 'text-red-500' : null}/>
+                    <FaHeart size={23} className={isLiked ? 'text-red-500' : null}/>
                 </button>
             </form>
 

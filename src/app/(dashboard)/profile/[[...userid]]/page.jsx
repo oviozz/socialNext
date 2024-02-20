@@ -17,13 +17,13 @@ export default async function Page({params}){
     return (
         <main className="flex flex-1 flex-col gap-4 md:gap-5 md:p-6">
 
-            <Suspense fallback={<ProfileSectionSkeleton />}>
+            <Suspense key={userid} fallback={<ProfileSectionSkeleton />}>
                 <ProfilePage params={params}/>
             </Suspense>
             <div>
                 <h2 className="font-semibold text-lg md:text-xl mb-4">Posts</h2>
                 <div className={"flex flex-wrap gap-4"}>
-                    <Suspense fallback={<PostSkeleton className={"flex flex-wrap gap-4"} limit={4}/> }>
+                    <Suspense key={userid} fallback={<PostSkeleton className={"flex flex-wrap gap-4"} limit={4}/> }>
                         <ProfilePosts userID={userid} />
                     </Suspense>
                 </div>

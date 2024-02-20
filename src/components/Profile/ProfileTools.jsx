@@ -10,7 +10,7 @@ export default async function ProfileTools({otherUserID, followers}){
 
     const { user: sessionInfo } = await getServerSession(authOptions);
     const otherID = Array.isArray(otherUserID) ? otherUserID[0] : otherUserID;
-    const isFollowing = followers.some(user => user._id === sessionInfo.id) ? "Following" : "Follow"
+    const isFollowing = followers.some(user => user._id === sessionInfo.id) ? "Unfollow" : "Follow"
 
     const followUserHandler = async () => {
         "use server"
@@ -32,7 +32,7 @@ export default async function ProfileTools({otherUserID, followers}){
                     : (
                     <div>
                         <form action={followUserHandler}>
-                            <FormButton className={"mt-1 border bg-purple-500"} text={isFollowing} icon={<UsersIcon />} disable={true}/>
+                            <FormButton className={`mt-1 border bg-purple-500`} text={isFollowing} icon={isFollowing === "Follow" ? <UsersIcon /> : <UserXIcon />} disable={true}/>
                         </form>
                     </div>
                 )
@@ -62,26 +62,6 @@ function SettingsIcon(props) {
     )
 }
 
-//
-// function CheckIcon(props) {
-//     return (
-//         <svg
-//             {...props}
-//             xmlns="http://www.w3.org/2000/svg"
-//             width="24"
-//             height="24"
-//             viewBox="0 0 24 24"
-//             fill="none"
-//             stroke="currentColor"
-//             strokeWidth="2"
-//             strokeLinecap="round"
-//             strokeLinejoin="round"
-//         >
-//             <polyline points="20 6 9 17 4 12" />
-//         </svg>
-//     )
-// }
-
 
 function UsersIcon(props) {
     return (
@@ -101,6 +81,29 @@ function UsersIcon(props) {
             <circle cx="9" cy="7" r="4" />
             <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+    )
+}
+
+
+function UserXIcon(props) {
+    return (
+        <svg
+            {...props}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <line x1="17" x2="22" y1="8" y2="13" />
+            <line x1="22" x2="17" y1="8" y2="13" />
         </svg>
     )
 }

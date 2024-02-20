@@ -7,7 +7,7 @@ import Image from "next/image";
 import {useState} from "react";
 
 
-const ImageLoad = ({disabled, imageSet}) => {
+const ImageLoad = ({disabled, imageSet, imageURL}) => {
 
     const [imagePreview, setImagePreview] = useState(null);
 
@@ -46,7 +46,7 @@ const ImageLoad = ({disabled, imageSet}) => {
                     (
                         <div className="mt-2">
                             <Image
-                                src={'placeholder.svg'}
+                                src={imageURL || 'placeholder.svg'}
                                 alt="Image Preview"
                                 className="w-full h-48 object-cover rounded border"
                                 width={200} // Set a fixed width

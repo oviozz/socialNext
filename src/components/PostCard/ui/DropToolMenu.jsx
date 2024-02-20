@@ -1,13 +1,12 @@
 
-
 import {DropdownMenu, DropdownMenuContent, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {Button} from "@/components/ui/button";
 import Share from "@/components/PostCard/ui/Share";
 import Delete from "@/components/PostCard/ui/Delete";
 
-// prevent post creat before they complete it
+export default async function DropToolMenu({userID, postData}){
 
-export default async function DropToolMenu({userID, postUserID, postCardID}){
+    const {postUserID, postCardID} = postData;
 
     return (
         <DropdownMenu >
@@ -18,8 +17,8 @@ export default async function DropToolMenu({userID, postUserID, postCardID}){
             </DropdownMenuTrigger>
 
             <DropdownMenuContent className={"flex flex-col"} align="end">
-                <Share shareID={postCardID}/>
-                {postUserID === userID ? <Delete deletePostID={postCardID} postUserID={postUserID}/> : null}
+                <Share shareID={postCardID} />
+                {postUserID === userID ? <Delete postData={postData}/> : null}
             </DropdownMenuContent>
         </DropdownMenu>
     )

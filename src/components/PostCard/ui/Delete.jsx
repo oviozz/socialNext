@@ -15,14 +15,19 @@ import { MdDeleteForever } from "react-icons/md";
 import {deletePostHandler} from "@/lib/postFunctions/actions";
 import {useState} from "react";
 import toast from "react-hot-toast";
+import {firebaseDeleteImage} from "@/firebase/actions";
 
 
 
-export default function Delete({deletePostID, postUserID}){
+export default function Delete({postData}){
+
+    const {postUserID, postCardID: deletePostID, imageURL} = postData;
+
 
     const [open, setOpen] = useState(false)
 
     const onDelete = async () => {
+
         const res = await deletePostHandler(deletePostID, postUserID);
 
         switch (res.status){

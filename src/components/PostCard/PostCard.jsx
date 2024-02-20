@@ -1,7 +1,5 @@
 
 import Like from "@/components/PostCard/ui/Like/Like";
-import Comment from "@/components/PostCard/ui/Comment";
-import Edit from "@/components/PostCard/ui/Edit";
 import DropToolMenu from "@/components/PostCard/ui/DropToolMenu";
 import Image from "next/image";
 import AvatarDisplay from "@/components/AvatarDisplay";
@@ -14,7 +12,7 @@ export default async function PostCard({postData, size}){
 
     const session = await getServerSession(authOptions);
     const userID = session?.user.id;
-    const maxWidth = size === 'large' ? 'max-w-2xl' : 'max-w-xl';
+    const maxWidth = size === 'large' ? 'max-w-2xl' : 'max-w-lg';
     const {_id: postID, user, image: postImage, caption, likes, comments, createdAt} = postData;
     const selfPost = userID !== user._id;
 
@@ -40,7 +38,7 @@ export default async function PostCard({postData, size}){
                     </Link>
 
                     <div>
-                        <DropToolMenu userID={userID} postCardID={postID} postUserID={user._id} />
+                        <DropToolMenu userID={userID} postData={{postCardID: postID, postUserID: user._id, imageURL: postImage}}/>
                     </div>
                 </div>
 
@@ -50,7 +48,8 @@ export default async function PostCard({postData, size}){
                 <div className={"flex gap-5"}>
                     <div className={'lg:w-[700px] w-full'}>
                         <Image
-                            alt="Post image"
+                            key={postID}
+                            alt={caption}
                             className="rounded-lg object-cover w-full aspect-[4/3]  group-hover:opacity-50 transition-opacity mt-4"
                             src={postImage}
                             height={500}
@@ -60,10 +59,8 @@ export default async function PostCard({postData, size}){
 
                 </div>
 
-                <div className="flex items-center mt-4 justify-between lg:justify-normal select-none">
+                <div className="flex items-center mt-3 justify-normal select-none gap-5">
                     <Like postCardID={postID} likes={likes} userID={userID}/>
-                    <Comment />
-                    <Edit />
                 </div>
 
             </div>
