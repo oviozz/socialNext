@@ -8,9 +8,6 @@ import NextAuth from "next-auth";
 import connectDB from "@/lib/dbConnect";
 import {jsx} from "react/jsx-runtime";
 
-export const config = {
-    runtime: 'edge',
-}
 export const authOptions = {
     adapter: MongoDBAdapter(clientPromise),
     session: {
