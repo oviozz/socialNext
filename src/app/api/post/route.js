@@ -4,8 +4,6 @@ import Post from "@/models/Post";
 import {NextResponse} from "next/server";
 import User from "@/models/User";
 
-export const runtime = 'edge'
-
 export const GET = async () => { // get all post
 
     try {
