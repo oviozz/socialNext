@@ -10,7 +10,7 @@ export default function AuthButton({session}){
         session ? (
                 <Link
                     className={"mt-auto flex items-center gap-3 rounded-md px-3 py-2 text-gray-500 transition-all dark:text-gray-400 dark:hover:text-gray-100 hover:text-gray-900"}
-                    onClick={async () => await signOut({redirect: false})}
+                    onClick={() => signOut({redirect: false})}
                     href={"/login"}>
                     <LogOutIcon className={"h-4 w-4"} />
                     Log out

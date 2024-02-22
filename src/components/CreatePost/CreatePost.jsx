@@ -4,7 +4,6 @@
 import CreatePostClient from "@/components/CreatePost/CreatePostClient";
 import {useEffect, useState} from "react";
 import {useSession} from "next-auth/react";
-import ProfileCompleteAlert from "@/components/ProfileCompleteAlert";
 
 const CreatePost = ({dataValidate}) => {
 

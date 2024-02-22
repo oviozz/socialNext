@@ -11,6 +11,7 @@ export const getAccountProfile = async (userID) => {
     const session = await getServerSession(authOptions);
     const targetUserID = userID ? userID : session?.user.id;
 
+
     try {
         const res = await fetch(`${process.env.FETCH_URL}/api/profile/${targetUserID}`, {
             //cache: 'force-cache',
