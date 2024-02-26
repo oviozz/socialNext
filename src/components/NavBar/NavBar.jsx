@@ -1,7 +1,7 @@
 
 import {Input} from "@/components/ui/input";
 import {ThemeToggle} from "@/components/ThemeToggle/ThemeToggle";
-import MenuToggle from "@/components/NavBar/MenuToggle";
+import MenuToggle from "@/components/SideBar/SideBarMenuToggle/MenuToggle";
 import CreatePost from "@/components/CreatePost/CreatePost";
 import {getServerSession} from "next-auth";
 import {authOptions} from "@/app/api/auth/[...nextauth]/route";

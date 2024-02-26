@@ -18,7 +18,6 @@ export default function SideLinks({className}){
 
     const linksData = [
         { name: 'Home', href: '/', icon: HomeIcon },
-        { name: 'Friends', href: '/friends', icon: UsersIcon },
         { name: 'Profile', href: '/profile', icon: UserIcon },
         { name: 'Settings', href: `/setting`, icon: SettingsIcon },
     ];
