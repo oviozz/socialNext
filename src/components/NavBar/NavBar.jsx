@@ -10,7 +10,7 @@ import {getAccountProfile} from "@/lib/profileFunctions/actions";
 
 const NavBar = async () => {
 
-    const {dbUser} = await getAccountProfile();
+    const user = await getAccountProfile();
 
     return (
         <nav className="flex p-4 h-14 lg:h-[60px] items-center justify-between gap-4 border-b bg-gray-100/40 px-6 dark:bg-gray-800/40">
@@ -27,7 +27,7 @@ const NavBar = async () => {
 
             <div className={"flex items-center gap-2"}>
 
-                <CreatePost dataValidate={dbUser}/>
+                <CreatePost dataValidate={user?.dbUser}/>
                 <div className={"lg:flex hidden"}>
                     <ThemeToggle />
                 </div>

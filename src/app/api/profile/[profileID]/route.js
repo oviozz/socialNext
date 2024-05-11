@@ -11,14 +11,14 @@ export const GET = async (_, {params}) => {
 
     await connectDB();
 
-    const userID = params.profileID;
+    const { profileID } = params;
 
-    if (!userID){
-        return NextResponse.json({error: "Invalid Auth", status: 500})
+    if (!profileID) {
+        return NextResponse.json({ error: "Invalid profile ID", status: 400 });
     }
 
     try {
-        const dbUser = await User.findById(userID)
+        const dbUser = await User.findById(profileID)
             .populate("following")
             .populate("followers")
 
@@ -35,11 +35,11 @@ export const POST = async (req, {params}) => {
 
     await connectDB();
 
-    const userID = params.profileID;
+    const { profileID } = params;
     const {formData: updatedData} = await req.json();
 
     try {
-        const updatedUser = await User.findByIdAndUpdate(userID, {
+        const updatedUser = await User.findByIdAndUpdate(profileID, {
             ...updatedData,
             updatedAt: Date.now(),
         }, )//{new: true}

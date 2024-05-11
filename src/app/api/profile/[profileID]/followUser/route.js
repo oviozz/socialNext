@@ -13,8 +13,11 @@ export const POST = async (req, {params}) => {
     const { profileID: otherProfile } = params;
 
     try {
-        const otherUser = await User.findById(otherProfile);
-        const selfUser = await User.findById(userID);
+
+        const [otherUser, selfUser] = await Promise.all([
+            User.findById(otherProfile),
+            User.findById(userID)
+        ]);
 
         if (!otherUser || !selfUser){
             return NextResponse.json({ error: "Unable to find User", status: 500 });
@@ -36,8 +39,10 @@ export const POST = async (req, {params}) => {
         otherUser.followers = Array.from(uniqueFollowTrack);
         selfUser.following = Array.from(uniqueFollowingTrack)
 
-        await otherUser.save();
-        await selfUser.save();
+        await Promise.all([
+            otherUser.save(),
+            selfUser.save()
+        ]);
 
         return NextResponse.json({ message: 'User followed successfully', status: 200 });
 

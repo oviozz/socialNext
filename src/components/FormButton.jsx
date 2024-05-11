@@ -8,7 +8,8 @@ import React from 'react'
 
 const FormButton = ({text, disable, icon, className}) => {
 
-    const { pending } = useFormStatus();
+    const formStats = useFormStatus();
+    const { pending } = formStats;
 
     return (
         <Button

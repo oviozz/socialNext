@@ -44,7 +44,6 @@ export default function Login(){
                 router.refresh();
             }
         })
-
     }
 
     const isFormValid = formData.email.trim() !== "" && formData.password.trim() !== "";

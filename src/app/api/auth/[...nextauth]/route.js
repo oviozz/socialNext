@@ -13,7 +13,9 @@ export const authOptions = {
     session: {
         strategy: "jwt",
     },
-    secret: process.env.NEXTAUTH_SECRET,
+    jwt: {
+        secret: process.env.NEXTAUTH_SECRET
+    },
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -57,20 +59,22 @@ export const authOptions = {
         newUser: "/register",
         error: "/login",
     },
-    callbacks: {
 
+    callbacks: {
         jwt: async ({user, token}) => {
+
             if (user){
                 token.uid = user.id;
             }
-
             return token;
         },
 
         session: async ({session, token}) => {
+
             if (session?.user){
                 session.user.id = token.sub;
             }
+
             return session;
         }
     },

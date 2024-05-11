@@ -1,5 +1,6 @@
 
 "use client"
+
 import {Input} from "@/components/ui/input";
 import {useState} from "react";
 import { updateProfile} from "@/lib/profileFunctions/actions";
@@ -8,6 +9,7 @@ import toast from "react-hot-toast";
 import {firebaseUploadImage} from "@/firebase/actions";
 import AvatarDisplay from "@/components/AvatarDisplay";
 import { RxUpdate } from "react-icons/rx";
+import {useRouter} from "next/navigation";
 
 function SettingForm({formData}) {
 
@@ -47,7 +49,7 @@ function SettingForm({formData}) {
             toast.error("Please fill out the username and bio");
             return;
         }
-        
+
         let imageURL = formValue.profilePic;
 
         if (imageFile){

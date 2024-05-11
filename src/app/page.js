@@ -3,6 +3,8 @@
 import {Suspense} from "react";
 import PostSkeleton from "@/components/Skeleton/PostSkeleton";
 import HomePage from "@/components/Home/HomePage";
+import {getServerSession} from "next-auth";
+import {authOptions} from "@/app/api/auth/[...nextauth]/route";
 
 
 export default async function Home() {

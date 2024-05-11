@@ -3,16 +3,20 @@ import connectDB from "@/lib/dbConnect";
 import Post from "@/models/Post";
 import {NextResponse} from "next/server";
 import User from "@/models/User";
+import {getToken} from "next-auth/jwt";
 
-export const GET = async () => { // get all post
+const secret = process.env.NEXTAUTH_SECRET
+
+export const GET = async (req, res) => { // get all post
 
     try {
 
         await connectDB();
+        const token = await getToken({ req, secret })
 
         const allPosts = await Post.find().populate('user').sort({createdAt: -1})
 
-        return NextResponse.json({ posts: allPosts, status: 200 });
+        return NextResponse.json({ token: token, posts: allPosts, status: 200 });
 
     } catch (error) {
         console.error('Error fetching posts:', error.message);
@@ -21,8 +25,6 @@ export const GET = async () => { // get all post
     }
 
 }
-
-
 
 export const POST = async (req) => { // create post
 

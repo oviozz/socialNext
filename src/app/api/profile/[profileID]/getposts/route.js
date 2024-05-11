@@ -1,3 +1,4 @@
+
 import connectDB from "@/lib/dbConnect";
 import {NextResponse} from "next/server";
 import Post from "@/models/Post";
